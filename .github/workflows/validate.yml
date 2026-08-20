@@ -1,0 +1,57 @@
+# Valida cada workflow y cada formulario de este repositorio contra las
+# especificaciones que publica EventConductor, con el workflow-maven-plugin.
+#
+# Es el único check de este repositorio: aquí no hay código que compilar, sólo
+# definiciones que tienen que ser correctas antes de llegar a master.
+
+name: Validate definitions
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+# Un push nuevo a la misma rama invalida la ejecución anterior.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate workflows & forms
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: zulu
+          cache: maven
+
+      - name: Validate definitions
+        run: mvn -B -ntp verify
+
+      # El validador acepta .json/.yaml/.yml, y este repositorio guarda .ec/.ecform,
+      # así que el pom los copia a target/ec-validation/ renombrados. Si esa copia se
+      # deja un fichero fuera — una extensión nueva, un subdirectorio que el fileset no
+      # cubre — el build seguiría en verde habiendo validado de menos. Este paso lo
+      # convierte en un fallo: todo lo que hay en definitions/ tiene que haber llegado
+      # al validador. Desaparece junto con el apaño, cuando el plugin lea .ec de serie.
+      - name: Toda definición llegó al validador
+        run: |
+          declared=$(find definitions -type f ! -name '*.md' | wc -l)
+          staged=$(find target/ec-validation -type f | wc -l)
+          echo "definiciones: $declared — validadas: $staged"
+          if [ "$declared" -ne "$staged" ]; then
+            echo "::error::$declared definiciones en definitions/, pero sólo $staged llegaron al validador."
+            echo "--- definitions/ ---"; find definitions -type f ! -name '*.md' | sort
+            echo "--- target/ec-validation/ ---"; find target/ec-validation -type f | sort
+            exit 1
+          fi
