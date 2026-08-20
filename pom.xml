@@ -16,77 +16,15 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <eventconductor.plugin.version>2.2.2</eventconductor.plugin.version>
+        <!-- 2.3.0 es la primera versión que lee .ec/.ecform/.ecrule. Bajar de aquí
+             no da error: el validador deja de ver los ficheros y pasa en verde. -->
+        <eventconductor.plugin.version>2.3.0</eventconductor.plugin.version>
 
-        <!-- Dónde viven las definiciones tal y como las editan los IDE plugins. -->
         <ec.definitions.dir>${project.basedir}/definitions</ec.definitions.dir>
-        <!-- Copia intermedia con las extensiones que el validador reconoce (ver más abajo). -->
-        <ec.staging.dir>${project.build.directory}/ec-validation</ec.staging.dir>
     </properties>
 
     <build>
         <plugins>
-            <!--
-                El validador sólo recoge *.json, *.yaml y *.yml (hasta 2.2.2 incluido), mientras que
-                el editor y los IDE plugins escriben *.ec y *.ecform — que son YAML con otra extensión.
-                Sin este paso el goal validate recorrería el directorio, no encontraría nada y daría
-                el build por bueno. Aquí espejamos definitions/ en target/ec-validation/ renombrando
-                .ec/.ecform a .yaml, y apuntamos el plugin a esa copia.
-
-                Cuando el plugin acepte .ec/.ecform de forma nativa, este bloque sobra: basta apuntar
-                workflowsDirectory/formsDirectory directamente a ${ec.definitions.dir}/...
-            -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <id>stage-definitions</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target>
-                                <!-- Borrado previo: una definición eliminada no debe seguir validándose. -->
-                                <delete dir="${ec.staging.dir}"/>
-
-                                <copy todir="${ec.staging.dir}/workflows">
-                                    <fileset dir="${ec.definitions.dir}/workflows"
-                                             includes="**/*.ec" erroronmissingdir="false"/>
-                                    <globmapper from="*.ec" to="*.yaml"/>
-                                </copy>
-                                <copy todir="${ec.staging.dir}/workflows">
-                                    <fileset dir="${ec.definitions.dir}/workflows"
-                                             includes="**/*.json,**/*.yaml,**/*.yml" erroronmissingdir="false"/>
-                                </copy>
-
-                                <copy todir="${ec.staging.dir}/forms">
-                                    <fileset dir="${ec.definitions.dir}/forms"
-                                             includes="**/*.ecform" erroronmissingdir="false"/>
-                                    <globmapper from="*.ecform" to="*.yaml"/>
-                                </copy>
-                                <copy todir="${ec.staging.dir}/forms">
-                                    <fileset dir="${ec.definitions.dir}/forms"
-                                             includes="**/*.json,**/*.yaml,**/*.yml" erroronmissingdir="false"/>
-                                </copy>
-
-                                <copy todir="${ec.staging.dir}/rules">
-                                    <fileset dir="${ec.definitions.dir}/rules"
-                                             includes="**/*.ecrule" erroronmissingdir="false"/>
-                                    <globmapper from="*.ecrule" to="*.yaml"/>
-                                </copy>
-                                <copy todir="${ec.staging.dir}/rules">
-                                    <fileset dir="${ec.definitions.dir}/rules"
-                                             includes="**/*.json,**/*.yaml,**/*.yml" erroronmissingdir="false"/>
-                                </copy>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>io.mateu.workflow</groupId>
                 <artifactId>workflow-maven-plugin</artifactId>
@@ -101,10 +39,10 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <workflowsDirectory>${ec.staging.dir}/workflows</workflowsDirectory>
-                    <formsDirectory>${ec.staging.dir}/forms</formsDirectory>
-                    <rulesDirectory>${ec.staging.dir}/rules</rulesDirectory>
-                    <!-- Un directorio vacío significa que la copia de arriba se rompió, no que todo va bien. -->
+                    <workflowsDirectory>${ec.definitions.dir}/workflows</workflowsDirectory>
+                    <formsDirectory>${ec.definitions.dir}/forms</formsDirectory>
+                    <rulesDirectory>${ec.definitions.dir}/rules</rulesDirectory>
+                    <!-- Un directorio vacío es un directorio movido o renombrado, no un visto bueno. -->
                     <failOnMissing>true</failOnMissing>
                     <!-- Todavía no hay reglas en este repositorio; ponlo a true al añadir definitions/rules. -->
                     <validateRules>false</validateRules>

@@ -36,22 +36,24 @@ jobs:
           cache: maven
 
       - name: Validate definitions
-        run: mvn -B -ntp verify
+        run: |
+          set -o pipefail
+          mvn -B -ntp verify | tee mvn.log
 
-      # El validador acepta .json/.yaml/.yml, y este repositorio guarda .ec/.ecform,
-      # así que el pom los copia a target/ec-validation/ renombrados. Si esa copia se
-      # deja un fichero fuera — una extensión nueva, un subdirectorio que el fileset no
-      # cubre — el build seguiría en verde habiendo validado de menos. Este paso lo
-      # convierte en un fallo: todo lo que hay en definitions/ tiene que haber llegado
-      # al validador. Desaparece junto con el apaño, cuando el plugin lea .ec de serie.
-      - name: Toda definición llegó al validador
+      # El modo en que esto falla es en verde: un validador que no encuentra los
+      # ficheros no se queja, informa de cero y da el build por bueno. Ya pasó una
+      # vez, con las extensiones .ec. Así que se compara lo que hay con lo que el
+      # plugin dice haber validado, y no cuadrar es un fallo.
+      - name: Se validaron todas las definiciones
         run: |
           declared=$(find definitions -type f ! -name '*.md' | wc -l)
-          staged=$(find target/ec-validation -type f | wc -l)
-          echo "definiciones: $declared — validadas: $staged"
-          if [ "$declared" -ne "$staged" ]; then
-            echo "::error::$declared definiciones en definitions/, pero sólo $staged llegaron al validador."
-            echo "--- definitions/ ---"; find definitions -type f ! -name '*.md' | sort
-            echo "--- target/ec-validation/ ---"; find target/ec-validation -type f | sort
+          validated=$(sed -n 's/.*EventConductor: \([0-9]\+\) definition(s) validated.*/\1/p' mvn.log | tail -1)
+          validated=${validated:-0}
+          echo "definiciones: $declared — validadas: $validated"
+          if [ "$validated" -ne "$declared" ]; then
+            echo "::error::$declared definiciones en definitions/, pero el plugin validó $validated."
+            echo "Causas probables: una extensión que el plugin no reconoce, o un tipo"
+            echo "de definición desactivado en el pom (validateRules está a false)."
+            find definitions -type f ! -name '*.md' | sort
             exit 1
           fi
