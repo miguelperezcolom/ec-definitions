@@ -31,3 +31,8 @@ steps:
     preconditions:
       - stepId: step-onswhp
       - stepId: step-g59eji
+  - id: step-2mbgdk
+    type: ACTION
+    name: New Action
+    preconditions:
+      - stepId: step-wox762
