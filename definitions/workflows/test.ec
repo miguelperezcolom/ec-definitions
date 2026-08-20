@@ -13,3 +13,8 @@ steps:
     name: New End
     preconditions:
       - stepId: step-5y1g2o
+
+  - id: paso-roto
+    type: ACTION
+    name: Paso roto
+    preconditionStepId: este-paso-no-existe
