@@ -20,8 +20,9 @@ de grafos y los plugins de IntelliJ y VS Code, que abren estos ficheros en un ed
 —texto a un lado, grafo interactivo al otro— y les asocian el JSON Schema para autocompletar.
 Renombrarlos a `.yaml` funcionaría igual para el motor, pero perderías eso.
 
-`definitions/rules/*.ecrule` sería el tercer tipo. Todavía no hay ninguna: mira las
-[limitaciones](#limitaciones-conocidas) antes de añadirlas.
+`definitions/rules/*.ecrule` es el tercer tipo, soportado de punta a punta desde 2.4.0
+—validador, import del motor y las dos extensiones de IDE— pero todavía no hay ninguna aquí.
+Al crear ese directorio hay que poner `validateRules` a `true` en el `pom.xml`.
 
 ## Validar en local
 
@@ -105,14 +106,9 @@ Un `id` que ya existe se sobrescribe. Los detalles, incluido el webhook, en la
 
 ## Limitaciones conocidas
 
-- **Las reglas no están validadas.** `validateRules` está a `false` en el `pom.xml` porque no
-  hay `definitions/rules/`. Al crear ese directorio hay que ponerlo a `true`; si se olvida, el
-  paso de CI que cuenta definiciones lo detecta.
-- **El motor no importa `.ecrule` desde git.** `ImportRulesFromGitUseCase` filtra sólo
-  `.json` / `.yaml` / `.yml`, al contrario que los de workflows y formularios, que sí aceptan
-  `.ec` y `.ecform`. Hasta que eso se arregle upstream, una regla en este repositorio tiene
-  que llamarse `.yaml` para que el motor la vea — aunque el validador ya la acepte con
-  cualquiera de las dos.
-- Requiere **JDK 21** y el plugin **2.3.0 o superior**. Bajar de 2.3.0 no da error: esa es la
+- **Las reglas no están validadas**, porque no hay ninguna. `validateRules` está a `false` en
+  el `pom.xml` mientras no exista `definitions/rules/`. Al crear ese directorio hay que ponerlo
+  a `true`; si se olvida, el paso de CI que cuenta definiciones lo detecta.
+- Requiere **JDK 21** y el plugin **2.3.0 o superior**. Bajar de ahí no da error: 2.3.0 es la
   primera versión que lee `.ec`, y las anteriores simplemente no encuentran nada y pasan en
-  verde.
+  verde. Del lado del motor, `.ecrule` necesita **2.4.0 o superior** por la misma razón.
