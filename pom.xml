@@ -18,7 +18,7 @@
 
         <!-- 2.3.0 es la primera versión que lee .ec/.ecform/.ecrule. Bajar de aquí
              no da error: el validador deja de ver los ficheros y pasa en verde. -->
-        <eventconductor.plugin.version>2.3.0</eventconductor.plugin.version>
+        <eventconductor.plugin.version>2.4.0</eventconductor.plugin.version>
 
         <ec.definitions.dir>${project.basedir}/definitions</ec.definitions.dir>
     </properties>
