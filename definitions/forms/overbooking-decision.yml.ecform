@@ -1,0 +1,19 @@
+name: Overbooking Decision
+fields:
+  - id: decision
+    label: Decision
+    dataType: string
+    stereotype: combobox
+    required: true
+    options:
+      - value: REJECT
+        label: Rechazar
+      - value: REFUND
+        label: Devolución
+      - value: WALK
+        label: Walk
+  - id: comments
+    label: Comentarios
+    dataType: string
+id: overbooking-form
+description: Walk, refund or reject overbooking

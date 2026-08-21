@@ -1,0 +1,17 @@
+name: B2B Cart Decision
+fields:
+  - id: decision
+    label: Decision
+    dataType: string
+    stereotype: combobox
+    required: true
+    options:
+      - value: APPROVE
+        label: Aprobar
+      - value: REJECT
+        label: Rechazar
+  - id: comments
+    label: Comentarios
+    dataType: string
+id: b2b-cart-form
+description: Approve or reject B2B cart
