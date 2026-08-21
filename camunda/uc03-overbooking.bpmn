@@ -1,0 +1,1651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:zeebe="http://camunda.org/schema/zeebe/1.0"
+                  xmlns:modeler="http://camunda.org/schema/modeler/1.0"
+                  id="Definitions_uc03_overbooking"
+                  targetNamespace="http://bpmn.io/schema/bpmn"
+                  exporter="ec-definitions"
+                  exporterVersion="1.0"
+                  modeler:executionPlatform="Camunda Cloud"
+                  modeler:executionPlatformVersion="8.6.0">
+  <bpmn:message id="Msg_cmd_setReservationOverbookingStatus" name="uc03.setReservationOverbookingStatus.run" />
+  <bpmn:message id="Msg_res_setReservationOverbookingStatus" name="uc03.setReservationOverbookingStatus.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_registerIncidence" name="uc03.registerIncidence.run" />
+  <bpmn:message id="Msg_res_registerIncidence" name="uc03.registerIncidence.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_rejectOverbooking" name="uc03.rejectOverbooking.run" />
+  <bpmn:message id="Msg_res_rejectOverbooking" name="uc03.rejectOverbooking.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_refundReservation" name="uc03.refundReservation.run" />
+  <bpmn:message id="Msg_res_refundReservation" name="uc03.refundReservation.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_registerRefund" name="uc03.registerRefund.run" />
+  <bpmn:message id="Msg_res_registerRefund" name="uc03.registerRefund.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_sendRefundNotification" name="uc03.sendRefundNotification.run" />
+  <bpmn:message id="Msg_res_sendRefundNotification" name="uc03.sendRefundNotification.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_confirmRefund" name="uc03.confirmRefund.run" />
+  <bpmn:message id="Msg_res_confirmRefund" name="uc03.confirmRefund.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_doWalk" name="uc03.doWalk.run" />
+  <bpmn:message id="Msg_res_doWalk" name="uc03.doWalk.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_adjustReservation" name="uc03.adjustReservation.run" />
+  <bpmn:message id="Msg_res_adjustReservation" name="uc03.adjustReservation.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_registerWalk" name="uc03.registerWalk.run" />
+  <bpmn:message id="Msg_res_registerWalk" name="uc03.registerWalk.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_sendWalkNotification" name="uc03.sendWalkNotification.run" />
+  <bpmn:message id="Msg_res_sendWalkNotification" name="uc03.sendWalkNotification.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_confirmWalk" name="uc03.confirmWalk.run" />
+  <bpmn:message id="Msg_res_confirmWalk" name="uc03.confirmWalk.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_restoreReservation" name="uc03.restoreReservation.run" />
+  <bpmn:message id="Msg_res_restoreReservation" name="uc03.restoreReservation.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_cancelIncidence" name="uc03.cancelIncidence.run" />
+  <bpmn:message id="Msg_res_cancelIncidence" name="uc03.cancelIncidence.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_cancelRefund" name="uc03.cancelRefund.run" />
+  <bpmn:message id="Msg_res_cancelRefund" name="uc03.cancelRefund.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_cancelAlternativeReservation" name="uc03.cancelAlternativeReservation.run" />
+  <bpmn:message id="Msg_res_cancelAlternativeReservation" name="uc03.cancelAlternativeReservation.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Msg_cmd_revertReservationAdjustment" name="uc03.revertReservationAdjustment.run" />
+  <bpmn:message id="Msg_res_revertReservationAdjustment" name="uc03.revertReservationAdjustment.completed">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=reservationId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:process id="uc03-overbooking-saga" name="UC03 Overbooking Saga" isExecutable="true">
+    <bpmn:documentation>UC03 - Saga de overbooking.
+
+Equivalente en Camunda 8 de definitions/workflows/uc03-overbooking-workflow.yml.ec.
+
+Toda la comunicacion con los workers va por eventos: cada paso es un subproceso
+embebido que lanza un message throw event con el comando (uc03.&lt;paso&gt;.run) y se
+queda esperando en un message catch event el evento de resultado
+(uc03.&lt;paso&gt;.completed), correlacionado por reservationId.
+
+Variable de entrada obligatoria: reservationId (es la correlation key).</bpmn:documentation>
+    <bpmn:subProcess id="sp_setReservationOverbookingStatus" name="Reserva a OVERBOOKING_IN_PROGRESS">
+      <bpmn:incoming>Flow_001</bpmn:incoming>
+      <bpmn:outgoing>Flow_002</bpmn:outgoing>
+      <bpmn:startEvent id="setReservationOverbookingStatus_start">
+        <bpmn:outgoing>setReservationOverbookingStatus_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="setReservationOverbookingStatus_f1" sourceRef="setReservationOverbookingStatus_start" targetRef="setReservationOverbookingStatus_cmd" />
+      <bpmn:intermediateThrowEvent id="setReservationOverbookingStatus_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" retries="1" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.setReservationOverbookingStatus.run" />
+            <zeebe:header key="resultEventName" value="uc03.setReservationOverbookingStatus.completed" />
+            <zeebe:header key="step" value="setReservationOverbookingStatus" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>setReservationOverbookingStatus_f1</bpmn:incoming>
+        <bpmn:outgoing>setReservationOverbookingStatus_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_setReservationOverbookingStatus" messageRef="Msg_cmd_setReservationOverbookingStatus" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="setReservationOverbookingStatus_f2" sourceRef="setReservationOverbookingStatus_cmd" targetRef="setReservationOverbookingStatus_res" />
+      <bpmn:intermediateCatchEvent id="setReservationOverbookingStatus_res" name="done">
+        <bpmn:incoming>setReservationOverbookingStatus_f2</bpmn:incoming>
+        <bpmn:outgoing>setReservationOverbookingStatus_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_setReservationOverbookingStatus" messageRef="Msg_res_setReservationOverbookingStatus" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="setReservationOverbookingStatus_f3" sourceRef="setReservationOverbookingStatus_res" targetRef="setReservationOverbookingStatus_end" />
+      <bpmn:endEvent id="setReservationOverbookingStatus_end">
+        <bpmn:incoming>setReservationOverbookingStatus_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_registerIncidence" name="Registrar incidencia en CRM">
+      <bpmn:incoming>Flow_002</bpmn:incoming>
+      <bpmn:outgoing>Flow_003</bpmn:outgoing>
+      <bpmn:startEvent id="registerIncidence_start">
+        <bpmn:outgoing>registerIncidence_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="registerIncidence_f1" sourceRef="registerIncidence_start" targetRef="registerIncidence_cmd" />
+      <bpmn:intermediateThrowEvent id="registerIncidence_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.registerIncidence.run" />
+            <zeebe:header key="resultEventName" value="uc03.registerIncidence.completed" />
+            <zeebe:header key="step" value="registerIncidence" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>registerIncidence_f1</bpmn:incoming>
+        <bpmn:outgoing>registerIncidence_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_registerIncidence" messageRef="Msg_cmd_registerIncidence" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="registerIncidence_f2" sourceRef="registerIncidence_cmd" targetRef="registerIncidence_res" />
+      <bpmn:intermediateCatchEvent id="registerIncidence_res" name="done">
+        <bpmn:incoming>registerIncidence_f2</bpmn:incoming>
+        <bpmn:outgoing>registerIncidence_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_registerIncidence" messageRef="Msg_res_registerIncidence" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="registerIncidence_f3" sourceRef="registerIncidence_res" targetRef="registerIncidence_end" />
+      <bpmn:endEvent id="registerIncidence_end">
+        <bpmn:incoming>registerIncidence_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_rejectOverbooking" name="Rechazar overbooking y restaurar reserva">
+      <bpmn:incoming>Flow_005</bpmn:incoming>
+      <bpmn:outgoing>Flow_008</bpmn:outgoing>
+      <bpmn:startEvent id="rejectOverbooking_start">
+        <bpmn:outgoing>rejectOverbooking_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="rejectOverbooking_f1" sourceRef="rejectOverbooking_start" targetRef="rejectOverbooking_cmd" />
+      <bpmn:intermediateThrowEvent id="rejectOverbooking_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.rejectOverbooking.run" />
+            <zeebe:header key="resultEventName" value="uc03.rejectOverbooking.completed" />
+            <zeebe:header key="step" value="rejectOverbooking" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>rejectOverbooking_f1</bpmn:incoming>
+        <bpmn:outgoing>rejectOverbooking_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_rejectOverbooking" messageRef="Msg_cmd_rejectOverbooking" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="rejectOverbooking_f2" sourceRef="rejectOverbooking_cmd" targetRef="rejectOverbooking_res" />
+      <bpmn:intermediateCatchEvent id="rejectOverbooking_res" name="done">
+        <bpmn:incoming>rejectOverbooking_f2</bpmn:incoming>
+        <bpmn:outgoing>rejectOverbooking_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_rejectOverbooking" messageRef="Msg_res_rejectOverbooking" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="rejectOverbooking_f3" sourceRef="rejectOverbooking_res" targetRef="rejectOverbooking_end" />
+      <bpmn:endEvent id="rejectOverbooking_end">
+        <bpmn:incoming>rejectOverbooking_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_refundReservation" name="Reembolsar reserva">
+      <bpmn:incoming>Flow_006</bpmn:incoming>
+      <bpmn:outgoing>Flow_009</bpmn:outgoing>
+      <bpmn:startEvent id="refundReservation_start">
+        <bpmn:outgoing>refundReservation_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="refundReservation_f1" sourceRef="refundReservation_start" targetRef="refundReservation_cmd" />
+      <bpmn:intermediateThrowEvent id="refundReservation_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" retries="1" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.refundReservation.run" />
+            <zeebe:header key="resultEventName" value="uc03.refundReservation.completed" />
+            <zeebe:header key="step" value="refundReservation" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>refundReservation_f1</bpmn:incoming>
+        <bpmn:outgoing>refundReservation_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_refundReservation" messageRef="Msg_cmd_refundReservation" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="refundReservation_f2" sourceRef="refundReservation_cmd" targetRef="refundReservation_res" />
+      <bpmn:intermediateCatchEvent id="refundReservation_res" name="done">
+        <bpmn:incoming>refundReservation_f2</bpmn:incoming>
+        <bpmn:outgoing>refundReservation_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_refundReservation" messageRef="Msg_res_refundReservation" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="refundReservation_f3" sourceRef="refundReservation_res" targetRef="refundReservation_end" />
+      <bpmn:endEvent id="refundReservation_end">
+        <bpmn:incoming>refundReservation_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_registerRefund" name="Registrar reembolso en contabilidad">
+      <bpmn:incoming>Flow_009</bpmn:incoming>
+      <bpmn:outgoing>Flow_010</bpmn:outgoing>
+      <bpmn:startEvent id="registerRefund_start">
+        <bpmn:outgoing>registerRefund_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="registerRefund_f1" sourceRef="registerRefund_start" targetRef="registerRefund_cmd" />
+      <bpmn:intermediateThrowEvent id="registerRefund_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.registerRefund.run" />
+            <zeebe:header key="resultEventName" value="uc03.registerRefund.completed" />
+            <zeebe:header key="step" value="registerRefund" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>registerRefund_f1</bpmn:incoming>
+        <bpmn:outgoing>registerRefund_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_registerRefund" messageRef="Msg_cmd_registerRefund" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="registerRefund_f2" sourceRef="registerRefund_cmd" targetRef="registerRefund_res" />
+      <bpmn:intermediateCatchEvent id="registerRefund_res" name="done">
+        <bpmn:incoming>registerRefund_f2</bpmn:incoming>
+        <bpmn:outgoing>registerRefund_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_registerRefund" messageRef="Msg_res_registerRefund" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="registerRefund_f3" sourceRef="registerRefund_res" targetRef="registerRefund_end" />
+      <bpmn:endEvent id="registerRefund_end">
+        <bpmn:incoming>registerRefund_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_sendRefundNotification" name="Notificar reserva reembolsada">
+      <bpmn:incoming>Flow_010</bpmn:incoming>
+      <bpmn:outgoing>Flow_011</bpmn:outgoing>
+      <bpmn:startEvent id="sendRefundNotification_start">
+        <bpmn:outgoing>sendRefundNotification_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="sendRefundNotification_f1" sourceRef="sendRefundNotification_start" targetRef="sendRefundNotification_cmd" />
+      <bpmn:intermediateThrowEvent id="sendRefundNotification_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" retries="1" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.sendRefundNotification.run" />
+            <zeebe:header key="resultEventName" value="uc03.sendRefundNotification.completed" />
+            <zeebe:header key="step" value="sendRefundNotification" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>sendRefundNotification_f1</bpmn:incoming>
+        <bpmn:outgoing>sendRefundNotification_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_sendRefundNotification" messageRef="Msg_cmd_sendRefundNotification" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="sendRefundNotification_f2" sourceRef="sendRefundNotification_cmd" targetRef="sendRefundNotification_res" />
+      <bpmn:intermediateCatchEvent id="sendRefundNotification_res" name="done">
+        <bpmn:incoming>sendRefundNotification_f2</bpmn:incoming>
+        <bpmn:outgoing>sendRefundNotification_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_sendRefundNotification" messageRef="Msg_res_sendRefundNotification" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="sendRefundNotification_f3" sourceRef="sendRefundNotification_res" targetRef="sendRefundNotification_end" />
+      <bpmn:endEvent id="sendRefundNotification_end">
+        <bpmn:incoming>sendRefundNotification_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_confirmRefund" name="Confirmar reembolso">
+      <bpmn:incoming>Flow_011</bpmn:incoming>
+      <bpmn:outgoing>Flow_012</bpmn:outgoing>
+      <bpmn:startEvent id="confirmRefund_start">
+        <bpmn:outgoing>confirmRefund_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="confirmRefund_f1" sourceRef="confirmRefund_start" targetRef="confirmRefund_cmd" />
+      <bpmn:intermediateThrowEvent id="confirmRefund_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" retries="1" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.confirmRefund.run" />
+            <zeebe:header key="resultEventName" value="uc03.confirmRefund.completed" />
+            <zeebe:header key="step" value="confirmRefund" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>confirmRefund_f1</bpmn:incoming>
+        <bpmn:outgoing>confirmRefund_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_confirmRefund" messageRef="Msg_cmd_confirmRefund" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="confirmRefund_f2" sourceRef="confirmRefund_cmd" targetRef="confirmRefund_res" />
+      <bpmn:intermediateCatchEvent id="confirmRefund_res" name="done">
+        <bpmn:incoming>confirmRefund_f2</bpmn:incoming>
+        <bpmn:outgoing>confirmRefund_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_confirmRefund" messageRef="Msg_res_confirmRefund" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="confirmRefund_f3" sourceRef="confirmRefund_res" targetRef="confirmRefund_end" />
+      <bpmn:endEvent id="confirmRefund_end">
+        <bpmn:incoming>confirmRefund_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_doWalk" name="Walk a habitacion alternativa">
+      <bpmn:incoming>Flow_007</bpmn:incoming>
+      <bpmn:outgoing>Flow_013</bpmn:outgoing>
+      <bpmn:startEvent id="doWalk_start">
+        <bpmn:outgoing>doWalk_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="doWalk_f1" sourceRef="doWalk_start" targetRef="doWalk_cmd" />
+      <bpmn:intermediateThrowEvent id="doWalk_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" retries="1" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.doWalk.run" />
+            <zeebe:header key="resultEventName" value="uc03.doWalk.completed" />
+            <zeebe:header key="step" value="doWalk" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>doWalk_f1</bpmn:incoming>
+        <bpmn:outgoing>doWalk_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_doWalk" messageRef="Msg_cmd_doWalk" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="doWalk_f2" sourceRef="doWalk_cmd" targetRef="doWalk_res" />
+      <bpmn:intermediateCatchEvent id="doWalk_res" name="done">
+        <bpmn:incoming>doWalk_f2</bpmn:incoming>
+        <bpmn:outgoing>doWalk_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_doWalk" messageRef="Msg_res_doWalk" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="doWalk_f3" sourceRef="doWalk_res" targetRef="doWalk_end" />
+      <bpmn:endEvent id="doWalk_end">
+        <bpmn:incoming>doWalk_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_adjustReservation" name="Ajuste economico">
+      <bpmn:incoming>Flow_013</bpmn:incoming>
+      <bpmn:outgoing>Flow_014</bpmn:outgoing>
+      <bpmn:startEvent id="adjustReservation_start">
+        <bpmn:outgoing>adjustReservation_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="adjustReservation_f1" sourceRef="adjustReservation_start" targetRef="adjustReservation_cmd" />
+      <bpmn:intermediateThrowEvent id="adjustReservation_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.adjustReservation.run" />
+            <zeebe:header key="resultEventName" value="uc03.adjustReservation.completed" />
+            <zeebe:header key="step" value="adjustReservation" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>adjustReservation_f1</bpmn:incoming>
+        <bpmn:outgoing>adjustReservation_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_adjustReservation" messageRef="Msg_cmd_adjustReservation" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="adjustReservation_f2" sourceRef="adjustReservation_cmd" targetRef="adjustReservation_res" />
+      <bpmn:intermediateCatchEvent id="adjustReservation_res" name="done">
+        <bpmn:incoming>adjustReservation_f2</bpmn:incoming>
+        <bpmn:outgoing>adjustReservation_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_adjustReservation" messageRef="Msg_res_adjustReservation" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="adjustReservation_f3" sourceRef="adjustReservation_res" targetRef="adjustReservation_end" />
+      <bpmn:endEvent id="adjustReservation_end">
+        <bpmn:incoming>adjustReservation_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_registerWalk" name="Registrar walk en contabilidad">
+      <bpmn:incoming>Flow_014</bpmn:incoming>
+      <bpmn:outgoing>Flow_015</bpmn:outgoing>
+      <bpmn:startEvent id="registerWalk_start">
+        <bpmn:outgoing>registerWalk_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="registerWalk_f1" sourceRef="registerWalk_start" targetRef="registerWalk_cmd" />
+      <bpmn:intermediateThrowEvent id="registerWalk_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.registerWalk.run" />
+            <zeebe:header key="resultEventName" value="uc03.registerWalk.completed" />
+            <zeebe:header key="step" value="registerWalk" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>registerWalk_f1</bpmn:incoming>
+        <bpmn:outgoing>registerWalk_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_registerWalk" messageRef="Msg_cmd_registerWalk" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="registerWalk_f2" sourceRef="registerWalk_cmd" targetRef="registerWalk_res" />
+      <bpmn:intermediateCatchEvent id="registerWalk_res" name="done">
+        <bpmn:incoming>registerWalk_f2</bpmn:incoming>
+        <bpmn:outgoing>registerWalk_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_registerWalk" messageRef="Msg_res_registerWalk" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="registerWalk_f3" sourceRef="registerWalk_res" targetRef="registerWalk_end" />
+      <bpmn:endEvent id="registerWalk_end">
+        <bpmn:incoming>registerWalk_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_sendWalkNotification" name="Notificar reserva actualizada">
+      <bpmn:incoming>Flow_015</bpmn:incoming>
+      <bpmn:outgoing>Flow_016</bpmn:outgoing>
+      <bpmn:startEvent id="sendWalkNotification_start">
+        <bpmn:outgoing>sendWalkNotification_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="sendWalkNotification_f1" sourceRef="sendWalkNotification_start" targetRef="sendWalkNotification_cmd" />
+      <bpmn:intermediateThrowEvent id="sendWalkNotification_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" retries="1" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.sendWalkNotification.run" />
+            <zeebe:header key="resultEventName" value="uc03.sendWalkNotification.completed" />
+            <zeebe:header key="step" value="sendWalkNotification" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>sendWalkNotification_f1</bpmn:incoming>
+        <bpmn:outgoing>sendWalkNotification_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_sendWalkNotification" messageRef="Msg_cmd_sendWalkNotification" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="sendWalkNotification_f2" sourceRef="sendWalkNotification_cmd" targetRef="sendWalkNotification_res" />
+      <bpmn:intermediateCatchEvent id="sendWalkNotification_res" name="done">
+        <bpmn:incoming>sendWalkNotification_f2</bpmn:incoming>
+        <bpmn:outgoing>sendWalkNotification_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_sendWalkNotification" messageRef="Msg_res_sendWalkNotification" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="sendWalkNotification_f3" sourceRef="sendWalkNotification_res" targetRef="sendWalkNotification_end" />
+      <bpmn:endEvent id="sendWalkNotification_end">
+        <bpmn:incoming>sendWalkNotification_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_confirmWalk" name="Confirmar walk">
+      <bpmn:incoming>Flow_016</bpmn:incoming>
+      <bpmn:outgoing>Flow_017</bpmn:outgoing>
+      <bpmn:startEvent id="confirmWalk_start">
+        <bpmn:outgoing>confirmWalk_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="confirmWalk_f1" sourceRef="confirmWalk_start" targetRef="confirmWalk_cmd" />
+      <bpmn:intermediateThrowEvent id="confirmWalk_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" retries="1" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.confirmWalk.run" />
+            <zeebe:header key="resultEventName" value="uc03.confirmWalk.completed" />
+            <zeebe:header key="step" value="confirmWalk" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>confirmWalk_f1</bpmn:incoming>
+        <bpmn:outgoing>confirmWalk_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_confirmWalk" messageRef="Msg_cmd_confirmWalk" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="confirmWalk_f2" sourceRef="confirmWalk_cmd" targetRef="confirmWalk_res" />
+      <bpmn:intermediateCatchEvent id="confirmWalk_res" name="done">
+        <bpmn:incoming>confirmWalk_f2</bpmn:incoming>
+        <bpmn:outgoing>confirmWalk_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_confirmWalk" messageRef="Msg_res_confirmWalk" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="confirmWalk_f3" sourceRef="confirmWalk_res" targetRef="confirmWalk_end" />
+      <bpmn:endEvent id="confirmWalk_end">
+        <bpmn:incoming>confirmWalk_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_restoreReservation" name="Restaurar estado de la reserva" isForCompensation="true">
+      <bpmn:startEvent id="restoreReservation_start">
+        <bpmn:outgoing>restoreReservation_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="restoreReservation_f1" sourceRef="restoreReservation_start" targetRef="restoreReservation_cmd" />
+      <bpmn:intermediateThrowEvent id="restoreReservation_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.restoreReservation.run" />
+            <zeebe:header key="resultEventName" value="uc03.restoreReservation.completed" />
+            <zeebe:header key="step" value="restoreReservation" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>restoreReservation_f1</bpmn:incoming>
+        <bpmn:outgoing>restoreReservation_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_restoreReservation" messageRef="Msg_cmd_restoreReservation" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="restoreReservation_f2" sourceRef="restoreReservation_cmd" targetRef="restoreReservation_res" />
+      <bpmn:intermediateCatchEvent id="restoreReservation_res" name="done">
+        <bpmn:incoming>restoreReservation_f2</bpmn:incoming>
+        <bpmn:outgoing>restoreReservation_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_restoreReservation" messageRef="Msg_res_restoreReservation" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="restoreReservation_f3" sourceRef="restoreReservation_res" targetRef="restoreReservation_end" />
+      <bpmn:endEvent id="restoreReservation_end">
+        <bpmn:incoming>restoreReservation_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_cancelIncidence" name="Cancelar incidencia en CRM" isForCompensation="true">
+      <bpmn:startEvent id="cancelIncidence_start">
+        <bpmn:outgoing>cancelIncidence_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="cancelIncidence_f1" sourceRef="cancelIncidence_start" targetRef="cancelIncidence_cmd" />
+      <bpmn:intermediateThrowEvent id="cancelIncidence_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" retries="1" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.cancelIncidence.run" />
+            <zeebe:header key="resultEventName" value="uc03.cancelIncidence.completed" />
+            <zeebe:header key="step" value="cancelIncidence" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>cancelIncidence_f1</bpmn:incoming>
+        <bpmn:outgoing>cancelIncidence_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_cancelIncidence" messageRef="Msg_cmd_cancelIncidence" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="cancelIncidence_f2" sourceRef="cancelIncidence_cmd" targetRef="cancelIncidence_res" />
+      <bpmn:intermediateCatchEvent id="cancelIncidence_res" name="done">
+        <bpmn:incoming>cancelIncidence_f2</bpmn:incoming>
+        <bpmn:outgoing>cancelIncidence_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_cancelIncidence" messageRef="Msg_res_cancelIncidence" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="cancelIncidence_f3" sourceRef="cancelIncidence_res" targetRef="cancelIncidence_end" />
+      <bpmn:endEvent id="cancelIncidence_end">
+        <bpmn:incoming>cancelIncidence_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_cancelRefund" name="Cancelar reembolso" isForCompensation="true">
+      <bpmn:startEvent id="cancelRefund_start">
+        <bpmn:outgoing>cancelRefund_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="cancelRefund_f1" sourceRef="cancelRefund_start" targetRef="cancelRefund_cmd" />
+      <bpmn:intermediateThrowEvent id="cancelRefund_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" retries="1" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.cancelRefund.run" />
+            <zeebe:header key="resultEventName" value="uc03.cancelRefund.completed" />
+            <zeebe:header key="step" value="cancelRefund" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>cancelRefund_f1</bpmn:incoming>
+        <bpmn:outgoing>cancelRefund_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_cancelRefund" messageRef="Msg_cmd_cancelRefund" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="cancelRefund_f2" sourceRef="cancelRefund_cmd" targetRef="cancelRefund_res" />
+      <bpmn:intermediateCatchEvent id="cancelRefund_res" name="done">
+        <bpmn:incoming>cancelRefund_f2</bpmn:incoming>
+        <bpmn:outgoing>cancelRefund_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_cancelRefund" messageRef="Msg_res_cancelRefund" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="cancelRefund_f3" sourceRef="cancelRefund_res" targetRef="cancelRefund_end" />
+      <bpmn:endEvent id="cancelRefund_end">
+        <bpmn:incoming>cancelRefund_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_cancelAlternativeReservation" name="Cancelar reserva alternativa" isForCompensation="true">
+      <bpmn:startEvent id="cancelAlternativeReservation_start">
+        <bpmn:outgoing>cancelAlternativeReservation_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="cancelAlternativeReservation_f1" sourceRef="cancelAlternativeReservation_start" targetRef="cancelAlternativeReservation_cmd" />
+      <bpmn:intermediateThrowEvent id="cancelAlternativeReservation_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" retries="1" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.cancelAlternativeReservation.run" />
+            <zeebe:header key="resultEventName" value="uc03.cancelAlternativeReservation.completed" />
+            <zeebe:header key="step" value="cancelAlternativeReservation" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>cancelAlternativeReservation_f1</bpmn:incoming>
+        <bpmn:outgoing>cancelAlternativeReservation_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_cancelAlternativeReservation" messageRef="Msg_cmd_cancelAlternativeReservation" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="cancelAlternativeReservation_f2" sourceRef="cancelAlternativeReservation_cmd" targetRef="cancelAlternativeReservation_res" />
+      <bpmn:intermediateCatchEvent id="cancelAlternativeReservation_res" name="done">
+        <bpmn:incoming>cancelAlternativeReservation_f2</bpmn:incoming>
+        <bpmn:outgoing>cancelAlternativeReservation_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_cancelAlternativeReservation" messageRef="Msg_res_cancelAlternativeReservation" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="cancelAlternativeReservation_f3" sourceRef="cancelAlternativeReservation_res" targetRef="cancelAlternativeReservation_end" />
+      <bpmn:endEvent id="cancelAlternativeReservation_end">
+        <bpmn:incoming>cancelAlternativeReservation_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="sp_revertReservationAdjustment" name="Revertir ajuste economico" isForCompensation="true">
+      <bpmn:startEvent id="revertReservationAdjustment_start">
+        <bpmn:outgoing>revertReservationAdjustment_f1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="revertReservationAdjustment_f1" sourceRef="revertReservationAdjustment_start" targetRef="revertReservationAdjustment_cmd" />
+      <bpmn:intermediateThrowEvent id="revertReservationAdjustment_cmd" name="run">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="publish-event" retries="1" />
+          <zeebe:taskHeaders>
+            <zeebe:header key="eventName" value="uc03.revertReservationAdjustment.run" />
+            <zeebe:header key="resultEventName" value="uc03.revertReservationAdjustment.completed" />
+            <zeebe:header key="step" value="revertReservationAdjustment" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>revertReservationAdjustment_f1</bpmn:incoming>
+        <bpmn:outgoing>revertReservationAdjustment_f2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_cmd_revertReservationAdjustment" messageRef="Msg_cmd_revertReservationAdjustment" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="revertReservationAdjustment_f2" sourceRef="revertReservationAdjustment_cmd" targetRef="revertReservationAdjustment_res" />
+      <bpmn:intermediateCatchEvent id="revertReservationAdjustment_res" name="done">
+        <bpmn:incoming>revertReservationAdjustment_f2</bpmn:incoming>
+        <bpmn:outgoing>revertReservationAdjustment_f3</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MED_res_revertReservationAdjustment" messageRef="Msg_res_revertReservationAdjustment" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="revertReservationAdjustment_f3" sourceRef="revertReservationAdjustment_res" targetRef="revertReservationAdjustment_end" />
+      <bpmn:endEvent id="revertReservationAdjustment_end">
+        <bpmn:incoming>revertReservationAdjustment_f3</bpmn:incoming>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:startEvent id="StartEvent_uc03" name="Overbooking detectado">
+      <bpmn:outgoing>Flow_001</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="overbookingHumanDecision" name="Decision humana de overbooking">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="overbooking-form" />
+        <zeebe:assignmentDefinition candidateGroups="overbooking-desk" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_003</bpmn:incoming>
+      <bpmn:outgoing>Flow_004</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_decision" name="decision?">
+      <bpmn:incoming>Flow_004</bpmn:incoming>
+      <bpmn:outgoing>Flow_005</bpmn:outgoing>
+      <bpmn:outgoing>Flow_006</bpmn:outgoing>
+      <bpmn:outgoing>Flow_007</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="End_rejected" name="Overbooking rechazado">
+      <bpmn:incoming>Flow_008</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="End_refunded" name="Reserva reembolsada">
+      <bpmn:incoming>Flow_012</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="End_walked" name="Walk completado">
+      <bpmn:incoming>Flow_017</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Comp_setReservationOverbookingStatus" name="compensar" attachedToRef="sp_setReservationOverbookingStatus">
+      <bpmn:compensateEventDefinition id="CED_setReservationOverbookingStatus" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Comp_registerIncidence" name="compensar" attachedToRef="sp_registerIncidence">
+      <bpmn:compensateEventDefinition id="CED_registerIncidence" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Comp_refundReservation" name="compensar" attachedToRef="sp_refundReservation">
+      <bpmn:compensateEventDefinition id="CED_refundReservation" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Comp_doWalk" name="compensar" attachedToRef="sp_doWalk">
+      <bpmn:compensateEventDefinition id="CED_doWalk" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Comp_adjustReservation" name="compensar" attachedToRef="sp_adjustReservation">
+      <bpmn:compensateEventDefinition id="CED_adjustReservation" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Timer_overbookingHumanDecision" name="90 s" attachedToRef="overbookingHumanDecision">
+      <bpmn:outgoing>Flow_018</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TED_overbookingHumanDecision">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1M30S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:intermediateThrowEvent id="Compensate_overbookingHumanDecision" name="Rollback saga">
+      <bpmn:incoming>Flow_018</bpmn:incoming>
+      <bpmn:outgoing>Flow_019</bpmn:outgoing>
+      <bpmn:compensateEventDefinition id="CTD_overbookingHumanDecision" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="End_ko_overbookingHumanDecision" name="Saga abortada">
+      <bpmn:incoming>Flow_019</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TERM_overbookingHumanDecision" />
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Timer_sp_sendRefundNotification" name="5 s" attachedToRef="sp_sendRefundNotification">
+      <bpmn:outgoing>Flow_020</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TED_sp_sendRefundNotification">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:intermediateThrowEvent id="Compensate_sp_sendRefundNotification" name="Rollback saga">
+      <bpmn:incoming>Flow_020</bpmn:incoming>
+      <bpmn:outgoing>Flow_021</bpmn:outgoing>
+      <bpmn:compensateEventDefinition id="CTD_sp_sendRefundNotification" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="End_ko_sp_sendRefundNotification" name="Saga abortada">
+      <bpmn:incoming>Flow_021</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TERM_sp_sendRefundNotification" />
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Timer_sp_confirmRefund" name="5 s" attachedToRef="sp_confirmRefund">
+      <bpmn:outgoing>Flow_022</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TED_sp_confirmRefund">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:intermediateThrowEvent id="Compensate_sp_confirmRefund" name="Rollback saga">
+      <bpmn:incoming>Flow_022</bpmn:incoming>
+      <bpmn:outgoing>Flow_023</bpmn:outgoing>
+      <bpmn:compensateEventDefinition id="CTD_sp_confirmRefund" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="End_ko_sp_confirmRefund" name="Saga abortada">
+      <bpmn:incoming>Flow_023</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TERM_sp_confirmRefund" />
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Timer_sp_sendWalkNotification" name="5 s" attachedToRef="sp_sendWalkNotification">
+      <bpmn:outgoing>Flow_024</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TED_sp_sendWalkNotification">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:intermediateThrowEvent id="Compensate_sp_sendWalkNotification" name="Rollback saga">
+      <bpmn:incoming>Flow_024</bpmn:incoming>
+      <bpmn:outgoing>Flow_025</bpmn:outgoing>
+      <bpmn:compensateEventDefinition id="CTD_sp_sendWalkNotification" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="End_ko_sp_sendWalkNotification" name="Saga abortada">
+      <bpmn:incoming>Flow_025</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TERM_sp_sendWalkNotification" />
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Timer_sp_confirmWalk" name="5 s" attachedToRef="sp_confirmWalk">
+      <bpmn:outgoing>Flow_026</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TED_sp_confirmWalk">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:intermediateThrowEvent id="Compensate_sp_confirmWalk" name="Rollback saga">
+      <bpmn:incoming>Flow_026</bpmn:incoming>
+      <bpmn:outgoing>Flow_027</bpmn:outgoing>
+      <bpmn:compensateEventDefinition id="CTD_sp_confirmWalk" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="End_ko_sp_confirmWalk" name="Saga abortada">
+      <bpmn:incoming>Flow_027</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TERM_sp_confirmWalk" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_001" sourceRef="StartEvent_uc03" targetRef="sp_setReservationOverbookingStatus" />
+    <bpmn:sequenceFlow id="Flow_002" sourceRef="sp_setReservationOverbookingStatus" targetRef="sp_registerIncidence" />
+    <bpmn:sequenceFlow id="Flow_003" sourceRef="sp_registerIncidence" targetRef="overbookingHumanDecision" />
+    <bpmn:sequenceFlow id="Flow_004" sourceRef="overbookingHumanDecision" targetRef="Gateway_decision" />
+    <bpmn:sequenceFlow id="Flow_005" sourceRef="Gateway_decision" targetRef="sp_rejectOverbooking" name="REJECT">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=decision = "REJECT"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_006" sourceRef="Gateway_decision" targetRef="sp_refundReservation" name="REFUND">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=decision = "REFUND"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_007" sourceRef="Gateway_decision" targetRef="sp_doWalk" name="WALK">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=decision = "WALK"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_008" sourceRef="sp_rejectOverbooking" targetRef="End_rejected" />
+    <bpmn:sequenceFlow id="Flow_009" sourceRef="sp_refundReservation" targetRef="sp_registerRefund" />
+    <bpmn:sequenceFlow id="Flow_010" sourceRef="sp_registerRefund" targetRef="sp_sendRefundNotification" />
+    <bpmn:sequenceFlow id="Flow_011" sourceRef="sp_sendRefundNotification" targetRef="sp_confirmRefund" />
+    <bpmn:sequenceFlow id="Flow_012" sourceRef="sp_confirmRefund" targetRef="End_refunded" />
+    <bpmn:sequenceFlow id="Flow_013" sourceRef="sp_doWalk" targetRef="sp_adjustReservation" />
+    <bpmn:sequenceFlow id="Flow_014" sourceRef="sp_adjustReservation" targetRef="sp_registerWalk" />
+    <bpmn:sequenceFlow id="Flow_015" sourceRef="sp_registerWalk" targetRef="sp_sendWalkNotification" />
+    <bpmn:sequenceFlow id="Flow_016" sourceRef="sp_sendWalkNotification" targetRef="sp_confirmWalk" />
+    <bpmn:sequenceFlow id="Flow_017" sourceRef="sp_confirmWalk" targetRef="End_walked" />
+    <bpmn:sequenceFlow id="Flow_018" sourceRef="Timer_overbookingHumanDecision" targetRef="Compensate_overbookingHumanDecision" />
+    <bpmn:sequenceFlow id="Flow_019" sourceRef="Compensate_overbookingHumanDecision" targetRef="End_ko_overbookingHumanDecision" />
+    <bpmn:sequenceFlow id="Flow_020" sourceRef="Timer_sp_sendRefundNotification" targetRef="Compensate_sp_sendRefundNotification" />
+    <bpmn:sequenceFlow id="Flow_021" sourceRef="Compensate_sp_sendRefundNotification" targetRef="End_ko_sp_sendRefundNotification" />
+    <bpmn:sequenceFlow id="Flow_022" sourceRef="Timer_sp_confirmRefund" targetRef="Compensate_sp_confirmRefund" />
+    <bpmn:sequenceFlow id="Flow_023" sourceRef="Compensate_sp_confirmRefund" targetRef="End_ko_sp_confirmRefund" />
+    <bpmn:sequenceFlow id="Flow_024" sourceRef="Timer_sp_sendWalkNotification" targetRef="Compensate_sp_sendWalkNotification" />
+    <bpmn:sequenceFlow id="Flow_025" sourceRef="Compensate_sp_sendWalkNotification" targetRef="End_ko_sp_sendWalkNotification" />
+    <bpmn:sequenceFlow id="Flow_026" sourceRef="Timer_sp_confirmWalk" targetRef="Compensate_sp_confirmWalk" />
+    <bpmn:sequenceFlow id="Flow_027" sourceRef="Compensate_sp_confirmWalk" targetRef="End_ko_sp_confirmWalk" />
+    <bpmn:association id="Assoc_setReservationOverbookingStatus" associationDirection="One" sourceRef="Comp_setReservationOverbookingStatus" targetRef="sp_restoreReservation" />
+    <bpmn:association id="Assoc_registerIncidence" associationDirection="One" sourceRef="Comp_registerIncidence" targetRef="sp_cancelIncidence" />
+    <bpmn:association id="Assoc_refundReservation" associationDirection="One" sourceRef="Comp_refundReservation" targetRef="sp_cancelRefund" />
+    <bpmn:association id="Assoc_doWalk" associationDirection="One" sourceRef="Comp_doWalk" targetRef="sp_cancelAlternativeReservation" />
+    <bpmn:association id="Assoc_adjustReservation" associationDirection="One" sourceRef="Comp_adjustReservation" targetRef="sp_revertReservationAdjustment" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_uc03">
+    <bpmndi:BPMNPlane id="BPMNPlane_uc03" bpmnElement="uc03-overbooking-saga">
+      <bpmndi:BPMNShape id="sp_setReservationOverbookingStatus_di" bpmnElement="sp_setReservationOverbookingStatus" isExpanded="true">
+        <dc:Bounds x="250" y="330" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="setReservationOverbookingStatus_start_di" bpmnElement="setReservationOverbookingStatus_start">
+        <dc:Bounds x="280" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="setReservationOverbookingStatus_cmd_di" bpmnElement="setReservationOverbookingStatus_cmd">
+        <dc:Bounds x="368" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="341" y="410" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="setReservationOverbookingStatus_res_di" bpmnElement="setReservationOverbookingStatus_res">
+        <dc:Bounds x="456" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="429" y="410" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="setReservationOverbookingStatus_end_di" bpmnElement="setReservationOverbookingStatus_end">
+        <dc:Bounds x="544" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_registerIncidence_di" bpmnElement="sp_registerIncidence" isExpanded="true">
+        <dc:Bounds x="670" y="330" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="registerIncidence_start_di" bpmnElement="registerIncidence_start">
+        <dc:Bounds x="700" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="registerIncidence_cmd_di" bpmnElement="registerIncidence_cmd">
+        <dc:Bounds x="788" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="761" y="410" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="registerIncidence_res_di" bpmnElement="registerIncidence_res">
+        <dc:Bounds x="876" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="849" y="410" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="registerIncidence_end_di" bpmnElement="registerIncidence_end">
+        <dc:Bounds x="964" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_rejectOverbooking_di" bpmnElement="sp_rejectOverbooking" isExpanded="true">
+        <dc:Bounds x="1360" y="50" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="rejectOverbooking_start_di" bpmnElement="rejectOverbooking_start">
+        <dc:Bounds x="1390" y="90" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="rejectOverbooking_cmd_di" bpmnElement="rejectOverbooking_cmd">
+        <dc:Bounds x="1478" y="90" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1451" y="130" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="rejectOverbooking_res_di" bpmnElement="rejectOverbooking_res">
+        <dc:Bounds x="1566" y="90" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1539" y="130" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="rejectOverbooking_end_di" bpmnElement="rejectOverbooking_end">
+        <dc:Bounds x="1654" y="90" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_refundReservation_di" bpmnElement="sp_refundReservation" isExpanded="true">
+        <dc:Bounds x="1360" y="330" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="refundReservation_start_di" bpmnElement="refundReservation_start">
+        <dc:Bounds x="1390" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="refundReservation_cmd_di" bpmnElement="refundReservation_cmd">
+        <dc:Bounds x="1478" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1451" y="410" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="refundReservation_res_di" bpmnElement="refundReservation_res">
+        <dc:Bounds x="1566" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1539" y="410" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="refundReservation_end_di" bpmnElement="refundReservation_end">
+        <dc:Bounds x="1654" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_registerRefund_di" bpmnElement="sp_registerRefund" isExpanded="true">
+        <dc:Bounds x="1780" y="330" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="registerRefund_start_di" bpmnElement="registerRefund_start">
+        <dc:Bounds x="1810" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="registerRefund_cmd_di" bpmnElement="registerRefund_cmd">
+        <dc:Bounds x="1898" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1871" y="410" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="registerRefund_res_di" bpmnElement="registerRefund_res">
+        <dc:Bounds x="1986" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1959" y="410" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="registerRefund_end_di" bpmnElement="registerRefund_end">
+        <dc:Bounds x="2074" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_sendRefundNotification_di" bpmnElement="sp_sendRefundNotification" isExpanded="true">
+        <dc:Bounds x="2200" y="330" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendRefundNotification_start_di" bpmnElement="sendRefundNotification_start">
+        <dc:Bounds x="2230" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendRefundNotification_cmd_di" bpmnElement="sendRefundNotification_cmd">
+        <dc:Bounds x="2318" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2291" y="410" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendRefundNotification_res_di" bpmnElement="sendRefundNotification_res">
+        <dc:Bounds x="2406" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2379" y="410" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendRefundNotification_end_di" bpmnElement="sendRefundNotification_end">
+        <dc:Bounds x="2494" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_confirmRefund_di" bpmnElement="sp_confirmRefund" isExpanded="true">
+        <dc:Bounds x="2620" y="330" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="confirmRefund_start_di" bpmnElement="confirmRefund_start">
+        <dc:Bounds x="2650" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="confirmRefund_cmd_di" bpmnElement="confirmRefund_cmd">
+        <dc:Bounds x="2738" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2711" y="410" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="confirmRefund_res_di" bpmnElement="confirmRefund_res">
+        <dc:Bounds x="2826" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2799" y="410" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="confirmRefund_end_di" bpmnElement="confirmRefund_end">
+        <dc:Bounds x="2914" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_doWalk_di" bpmnElement="sp_doWalk" isExpanded="true">
+        <dc:Bounds x="1360" y="730" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="doWalk_start_di" bpmnElement="doWalk_start">
+        <dc:Bounds x="1390" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="doWalk_cmd_di" bpmnElement="doWalk_cmd">
+        <dc:Bounds x="1478" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1451" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="doWalk_res_di" bpmnElement="doWalk_res">
+        <dc:Bounds x="1566" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1539" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="doWalk_end_di" bpmnElement="doWalk_end">
+        <dc:Bounds x="1654" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_adjustReservation_di" bpmnElement="sp_adjustReservation" isExpanded="true">
+        <dc:Bounds x="1780" y="730" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="adjustReservation_start_di" bpmnElement="adjustReservation_start">
+        <dc:Bounds x="1810" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="adjustReservation_cmd_di" bpmnElement="adjustReservation_cmd">
+        <dc:Bounds x="1898" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1871" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="adjustReservation_res_di" bpmnElement="adjustReservation_res">
+        <dc:Bounds x="1986" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1959" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="adjustReservation_end_di" bpmnElement="adjustReservation_end">
+        <dc:Bounds x="2074" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_registerWalk_di" bpmnElement="sp_registerWalk" isExpanded="true">
+        <dc:Bounds x="2200" y="730" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="registerWalk_start_di" bpmnElement="registerWalk_start">
+        <dc:Bounds x="2230" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="registerWalk_cmd_di" bpmnElement="registerWalk_cmd">
+        <dc:Bounds x="2318" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2291" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="registerWalk_res_di" bpmnElement="registerWalk_res">
+        <dc:Bounds x="2406" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2379" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="registerWalk_end_di" bpmnElement="registerWalk_end">
+        <dc:Bounds x="2494" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_sendWalkNotification_di" bpmnElement="sp_sendWalkNotification" isExpanded="true">
+        <dc:Bounds x="2620" y="730" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendWalkNotification_start_di" bpmnElement="sendWalkNotification_start">
+        <dc:Bounds x="2650" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendWalkNotification_cmd_di" bpmnElement="sendWalkNotification_cmd">
+        <dc:Bounds x="2738" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2711" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendWalkNotification_res_di" bpmnElement="sendWalkNotification_res">
+        <dc:Bounds x="2826" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2799" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendWalkNotification_end_di" bpmnElement="sendWalkNotification_end">
+        <dc:Bounds x="2914" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_confirmWalk_di" bpmnElement="sp_confirmWalk" isExpanded="true">
+        <dc:Bounds x="3040" y="730" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="confirmWalk_start_di" bpmnElement="confirmWalk_start">
+        <dc:Bounds x="3070" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="confirmWalk_cmd_di" bpmnElement="confirmWalk_cmd">
+        <dc:Bounds x="3158" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3131" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="confirmWalk_res_di" bpmnElement="confirmWalk_res">
+        <dc:Bounds x="3246" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3219" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="confirmWalk_end_di" bpmnElement="confirmWalk_end">
+        <dc:Bounds x="3334" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_restoreReservation_di" bpmnElement="sp_restoreReservation" isExpanded="true">
+        <dc:Bounds x="250" y="730" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="restoreReservation_start_di" bpmnElement="restoreReservation_start">
+        <dc:Bounds x="280" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="restoreReservation_cmd_di" bpmnElement="restoreReservation_cmd">
+        <dc:Bounds x="368" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="341" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="restoreReservation_res_di" bpmnElement="restoreReservation_res">
+        <dc:Bounds x="456" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="429" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="restoreReservation_end_di" bpmnElement="restoreReservation_end">
+        <dc:Bounds x="544" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_cancelIncidence_di" bpmnElement="sp_cancelIncidence" isExpanded="true">
+        <dc:Bounds x="670" y="730" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cancelIncidence_start_di" bpmnElement="cancelIncidence_start">
+        <dc:Bounds x="700" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cancelIncidence_cmd_di" bpmnElement="cancelIncidence_cmd">
+        <dc:Bounds x="788" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="761" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cancelIncidence_res_di" bpmnElement="cancelIncidence_res">
+        <dc:Bounds x="876" y="770" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="849" y="810" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cancelIncidence_end_di" bpmnElement="cancelIncidence_end">
+        <dc:Bounds x="964" y="770" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_cancelRefund_di" bpmnElement="sp_cancelRefund" isExpanded="true">
+        <dc:Bounds x="1900" y="80" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cancelRefund_start_di" bpmnElement="cancelRefund_start">
+        <dc:Bounds x="1930" y="120" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cancelRefund_cmd_di" bpmnElement="cancelRefund_cmd">
+        <dc:Bounds x="2018" y="120" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1991" y="160" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cancelRefund_res_di" bpmnElement="cancelRefund_res">
+        <dc:Bounds x="2106" y="120" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2079" y="160" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cancelRefund_end_di" bpmnElement="cancelRefund_end">
+        <dc:Bounds x="2194" y="120" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_cancelAlternativeReservation_di" bpmnElement="sp_cancelAlternativeReservation" isExpanded="true">
+        <dc:Bounds x="1360" y="1230" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cancelAlternativeReservation_start_di" bpmnElement="cancelAlternativeReservation_start">
+        <dc:Bounds x="1390" y="1270" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cancelAlternativeReservation_cmd_di" bpmnElement="cancelAlternativeReservation_cmd">
+        <dc:Bounds x="1478" y="1270" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1451" y="1310" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cancelAlternativeReservation_res_di" bpmnElement="cancelAlternativeReservation_res">
+        <dc:Bounds x="1566" y="1270" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1539" y="1310" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="cancelAlternativeReservation_end_di" bpmnElement="cancelAlternativeReservation_end">
+        <dc:Bounds x="1654" y="1270" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sp_revertReservationAdjustment_di" bpmnElement="sp_revertReservationAdjustment" isExpanded="true">
+        <dc:Bounds x="1780" y="1230" width="360" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="revertReservationAdjustment_start_di" bpmnElement="revertReservationAdjustment_start">
+        <dc:Bounds x="1810" y="1270" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="revertReservationAdjustment_cmd_di" bpmnElement="revertReservationAdjustment_cmd">
+        <dc:Bounds x="1898" y="1270" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1871" y="1310" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="revertReservationAdjustment_res_di" bpmnElement="revertReservationAdjustment_res">
+        <dc:Bounds x="1986" y="1270" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1959" y="1310" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="revertReservationAdjustment_end_di" bpmnElement="revertReservationAdjustment_end">
+        <dc:Bounds x="2074" y="1270" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_uc03_di" bpmnElement="StartEvent_uc03">
+        <dc:Bounds x="160" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="133" y="424" width="90" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="overbookingHumanDecision_di" bpmnElement="overbookingHumanDecision">
+        <dc:Bounds x="1090" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_decision_di" bpmnElement="Gateway_decision">
+        <dc:Bounds x="1250" y="375" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1238" y="349" width="74" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_rejected_di" bpmnElement="End_rejected">
+        <dc:Bounds x="1780" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1753" y="144" width="90" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_refunded_di" bpmnElement="End_refunded">
+        <dc:Bounds x="3040" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3013" y="424" width="90" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_walked_di" bpmnElement="End_walked">
+        <dc:Bounds x="3460" y="782" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3433" y="824" width="90" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Comp_setReservationOverbookingStatus_di" bpmnElement="Comp_setReservationOverbookingStatus">
+        <dc:Bounds x="290" y="452" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="263" y="494" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Comp_registerIncidence_di" bpmnElement="Comp_registerIncidence">
+        <dc:Bounds x="710" y="452" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="683" y="494" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Comp_refundReservation_di" bpmnElement="Comp_refundReservation">
+        <dc:Bounds x="1400" y="312" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1373" y="354" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Comp_doWalk_di" bpmnElement="Comp_doWalk">
+        <dc:Bounds x="1400" y="852" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1373" y="894" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Comp_adjustReservation_di" bpmnElement="Comp_adjustReservation">
+        <dc:Bounds x="1820" y="852" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1793" y="894" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Timer_overbookingHumanDecision_di" bpmnElement="Timer_overbookingHumanDecision">
+        <dc:Bounds x="1130" y="422" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1103" y="464" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Compensate_overbookingHumanDecision_di" bpmnElement="Compensate_overbookingHumanDecision">
+        <dc:Bounds x="1130" y="552" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1103" y="594" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_ko_overbookingHumanDecision_di" bpmnElement="End_ko_overbookingHumanDecision">
+        <dc:Bounds x="1250" y="552" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1223" y="594" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Timer_sp_sendRefundNotification_di" bpmnElement="Timer_sp_sendRefundNotification">
+        <dc:Bounds x="2500" y="452" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2473" y="494" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Compensate_sp_sendRefundNotification_di" bpmnElement="Compensate_sp_sendRefundNotification">
+        <dc:Bounds x="2500" y="552" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2473" y="594" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_ko_sp_sendRefundNotification_di" bpmnElement="End_ko_sp_sendRefundNotification">
+        <dc:Bounds x="2620" y="552" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2593" y="594" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Timer_sp_confirmRefund_di" bpmnElement="Timer_sp_confirmRefund">
+        <dc:Bounds x="2920" y="452" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2893" y="494" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Compensate_sp_confirmRefund_di" bpmnElement="Compensate_sp_confirmRefund">
+        <dc:Bounds x="2920" y="552" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2893" y="594" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_ko_sp_confirmRefund_di" bpmnElement="End_ko_sp_confirmRefund">
+        <dc:Bounds x="3040" y="552" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3013" y="594" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Timer_sp_sendWalkNotification_di" bpmnElement="Timer_sp_sendWalkNotification">
+        <dc:Bounds x="2920" y="852" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2893" y="894" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Compensate_sp_sendWalkNotification_di" bpmnElement="Compensate_sp_sendWalkNotification">
+        <dc:Bounds x="2920" y="952" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2893" y="994" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_ko_sp_sendWalkNotification_di" bpmnElement="End_ko_sp_sendWalkNotification">
+        <dc:Bounds x="3040" y="952" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3013" y="994" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Timer_sp_confirmWalk_di" bpmnElement="Timer_sp_confirmWalk">
+        <dc:Bounds x="3340" y="852" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3313" y="894" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Compensate_sp_confirmWalk_di" bpmnElement="Compensate_sp_confirmWalk">
+        <dc:Bounds x="3340" y="952" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3313" y="994" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_ko_sp_confirmWalk_di" bpmnElement="End_ko_sp_confirmWalk">
+        <dc:Bounds x="3460" y="952" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3433" y="994" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_001_di" bpmnElement="Flow_001">
+        <di:waypoint x="196" y="400" />
+        <di:waypoint x="250" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_002_di" bpmnElement="Flow_002">
+        <di:waypoint x="610" y="400" />
+        <di:waypoint x="670" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_003_di" bpmnElement="Flow_003">
+        <di:waypoint x="1030" y="400" />
+        <di:waypoint x="1090" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_004_di" bpmnElement="Flow_004">
+        <di:waypoint x="1190" y="400" />
+        <di:waypoint x="1250" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_005_di" bpmnElement="Flow_005">
+        <di:waypoint x="1275" y="375" />
+        <di:waypoint x="1275" y="120" />
+        <di:waypoint x="1360" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_006_di" bpmnElement="Flow_006">
+        <di:waypoint x="1300" y="400" />
+        <di:waypoint x="1360" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_007_di" bpmnElement="Flow_007">
+        <di:waypoint x="1275" y="425" />
+        <di:waypoint x="1275" y="800" />
+        <di:waypoint x="1360" y="800" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_008_di" bpmnElement="Flow_008">
+        <di:waypoint x="1720" y="120" />
+        <di:waypoint x="1780" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_009_di" bpmnElement="Flow_009">
+        <di:waypoint x="1720" y="400" />
+        <di:waypoint x="1780" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_010_di" bpmnElement="Flow_010">
+        <di:waypoint x="2140" y="400" />
+        <di:waypoint x="2200" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_011_di" bpmnElement="Flow_011">
+        <di:waypoint x="2560" y="400" />
+        <di:waypoint x="2620" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_012_di" bpmnElement="Flow_012">
+        <di:waypoint x="2980" y="400" />
+        <di:waypoint x="3040" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_013_di" bpmnElement="Flow_013">
+        <di:waypoint x="1720" y="800" />
+        <di:waypoint x="1780" y="800" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_014_di" bpmnElement="Flow_014">
+        <di:waypoint x="2140" y="800" />
+        <di:waypoint x="2200" y="800" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_015_di" bpmnElement="Flow_015">
+        <di:waypoint x="2560" y="800" />
+        <di:waypoint x="2620" y="800" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_016_di" bpmnElement="Flow_016">
+        <di:waypoint x="2980" y="800" />
+        <di:waypoint x="3040" y="800" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_017_di" bpmnElement="Flow_017">
+        <di:waypoint x="3400" y="800" />
+        <di:waypoint x="3460" y="800" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_018_di" bpmnElement="Flow_018">
+        <di:waypoint x="1148" y="458" />
+        <di:waypoint x="1148" y="552" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_019_di" bpmnElement="Flow_019">
+        <di:waypoint x="1166" y="570" />
+        <di:waypoint x="1250" y="570" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_020_di" bpmnElement="Flow_020">
+        <di:waypoint x="2518" y="488" />
+        <di:waypoint x="2518" y="552" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_021_di" bpmnElement="Flow_021">
+        <di:waypoint x="2536" y="570" />
+        <di:waypoint x="2620" y="570" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_022_di" bpmnElement="Flow_022">
+        <di:waypoint x="2938" y="488" />
+        <di:waypoint x="2938" y="552" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_023_di" bpmnElement="Flow_023">
+        <di:waypoint x="2956" y="570" />
+        <di:waypoint x="3040" y="570" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_024_di" bpmnElement="Flow_024">
+        <di:waypoint x="2938" y="888" />
+        <di:waypoint x="2938" y="952" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_025_di" bpmnElement="Flow_025">
+        <di:waypoint x="2956" y="970" />
+        <di:waypoint x="3040" y="970" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_026_di" bpmnElement="Flow_026">
+        <di:waypoint x="3358" y="888" />
+        <di:waypoint x="3358" y="952" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_027_di" bpmnElement="Flow_027">
+        <di:waypoint x="3376" y="970" />
+        <di:waypoint x="3460" y="970" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="setReservationOverbookingStatus_f1_di" bpmnElement="setReservationOverbookingStatus_f1">
+        <di:waypoint x="316" y="388" />
+        <di:waypoint x="368" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="setReservationOverbookingStatus_f2_di" bpmnElement="setReservationOverbookingStatus_f2">
+        <di:waypoint x="404" y="388" />
+        <di:waypoint x="456" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="setReservationOverbookingStatus_f3_di" bpmnElement="setReservationOverbookingStatus_f3">
+        <di:waypoint x="492" y="388" />
+        <di:waypoint x="544" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="registerIncidence_f1_di" bpmnElement="registerIncidence_f1">
+        <di:waypoint x="736" y="388" />
+        <di:waypoint x="788" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="registerIncidence_f2_di" bpmnElement="registerIncidence_f2">
+        <di:waypoint x="824" y="388" />
+        <di:waypoint x="876" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="registerIncidence_f3_di" bpmnElement="registerIncidence_f3">
+        <di:waypoint x="912" y="388" />
+        <di:waypoint x="964" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="rejectOverbooking_f1_di" bpmnElement="rejectOverbooking_f1">
+        <di:waypoint x="1426" y="108" />
+        <di:waypoint x="1478" y="108" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="rejectOverbooking_f2_di" bpmnElement="rejectOverbooking_f2">
+        <di:waypoint x="1514" y="108" />
+        <di:waypoint x="1566" y="108" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="rejectOverbooking_f3_di" bpmnElement="rejectOverbooking_f3">
+        <di:waypoint x="1602" y="108" />
+        <di:waypoint x="1654" y="108" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="refundReservation_f1_di" bpmnElement="refundReservation_f1">
+        <di:waypoint x="1426" y="388" />
+        <di:waypoint x="1478" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="refundReservation_f2_di" bpmnElement="refundReservation_f2">
+        <di:waypoint x="1514" y="388" />
+        <di:waypoint x="1566" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="refundReservation_f3_di" bpmnElement="refundReservation_f3">
+        <di:waypoint x="1602" y="388" />
+        <di:waypoint x="1654" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="registerRefund_f1_di" bpmnElement="registerRefund_f1">
+        <di:waypoint x="1846" y="388" />
+        <di:waypoint x="1898" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="registerRefund_f2_di" bpmnElement="registerRefund_f2">
+        <di:waypoint x="1934" y="388" />
+        <di:waypoint x="1986" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="registerRefund_f3_di" bpmnElement="registerRefund_f3">
+        <di:waypoint x="2022" y="388" />
+        <di:waypoint x="2074" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sendRefundNotification_f1_di" bpmnElement="sendRefundNotification_f1">
+        <di:waypoint x="2266" y="388" />
+        <di:waypoint x="2318" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sendRefundNotification_f2_di" bpmnElement="sendRefundNotification_f2">
+        <di:waypoint x="2354" y="388" />
+        <di:waypoint x="2406" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sendRefundNotification_f3_di" bpmnElement="sendRefundNotification_f3">
+        <di:waypoint x="2442" y="388" />
+        <di:waypoint x="2494" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="confirmRefund_f1_di" bpmnElement="confirmRefund_f1">
+        <di:waypoint x="2686" y="388" />
+        <di:waypoint x="2738" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="confirmRefund_f2_di" bpmnElement="confirmRefund_f2">
+        <di:waypoint x="2774" y="388" />
+        <di:waypoint x="2826" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="confirmRefund_f3_di" bpmnElement="confirmRefund_f3">
+        <di:waypoint x="2862" y="388" />
+        <di:waypoint x="2914" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="doWalk_f1_di" bpmnElement="doWalk_f1">
+        <di:waypoint x="1426" y="788" />
+        <di:waypoint x="1478" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="doWalk_f2_di" bpmnElement="doWalk_f2">
+        <di:waypoint x="1514" y="788" />
+        <di:waypoint x="1566" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="doWalk_f3_di" bpmnElement="doWalk_f3">
+        <di:waypoint x="1602" y="788" />
+        <di:waypoint x="1654" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="adjustReservation_f1_di" bpmnElement="adjustReservation_f1">
+        <di:waypoint x="1846" y="788" />
+        <di:waypoint x="1898" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="adjustReservation_f2_di" bpmnElement="adjustReservation_f2">
+        <di:waypoint x="1934" y="788" />
+        <di:waypoint x="1986" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="adjustReservation_f3_di" bpmnElement="adjustReservation_f3">
+        <di:waypoint x="2022" y="788" />
+        <di:waypoint x="2074" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="registerWalk_f1_di" bpmnElement="registerWalk_f1">
+        <di:waypoint x="2266" y="788" />
+        <di:waypoint x="2318" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="registerWalk_f2_di" bpmnElement="registerWalk_f2">
+        <di:waypoint x="2354" y="788" />
+        <di:waypoint x="2406" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="registerWalk_f3_di" bpmnElement="registerWalk_f3">
+        <di:waypoint x="2442" y="788" />
+        <di:waypoint x="2494" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sendWalkNotification_f1_di" bpmnElement="sendWalkNotification_f1">
+        <di:waypoint x="2686" y="788" />
+        <di:waypoint x="2738" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sendWalkNotification_f2_di" bpmnElement="sendWalkNotification_f2">
+        <di:waypoint x="2774" y="788" />
+        <di:waypoint x="2826" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sendWalkNotification_f3_di" bpmnElement="sendWalkNotification_f3">
+        <di:waypoint x="2862" y="788" />
+        <di:waypoint x="2914" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="confirmWalk_f1_di" bpmnElement="confirmWalk_f1">
+        <di:waypoint x="3106" y="788" />
+        <di:waypoint x="3158" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="confirmWalk_f2_di" bpmnElement="confirmWalk_f2">
+        <di:waypoint x="3194" y="788" />
+        <di:waypoint x="3246" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="confirmWalk_f3_di" bpmnElement="confirmWalk_f3">
+        <di:waypoint x="3282" y="788" />
+        <di:waypoint x="3334" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="restoreReservation_f1_di" bpmnElement="restoreReservation_f1">
+        <di:waypoint x="316" y="788" />
+        <di:waypoint x="368" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="restoreReservation_f2_di" bpmnElement="restoreReservation_f2">
+        <di:waypoint x="404" y="788" />
+        <di:waypoint x="456" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="restoreReservation_f3_di" bpmnElement="restoreReservation_f3">
+        <di:waypoint x="492" y="788" />
+        <di:waypoint x="544" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="cancelIncidence_f1_di" bpmnElement="cancelIncidence_f1">
+        <di:waypoint x="736" y="788" />
+        <di:waypoint x="788" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="cancelIncidence_f2_di" bpmnElement="cancelIncidence_f2">
+        <di:waypoint x="824" y="788" />
+        <di:waypoint x="876" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="cancelIncidence_f3_di" bpmnElement="cancelIncidence_f3">
+        <di:waypoint x="912" y="788" />
+        <di:waypoint x="964" y="788" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="cancelRefund_f1_di" bpmnElement="cancelRefund_f1">
+        <di:waypoint x="1966" y="138" />
+        <di:waypoint x="2018" y="138" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="cancelRefund_f2_di" bpmnElement="cancelRefund_f2">
+        <di:waypoint x="2054" y="138" />
+        <di:waypoint x="2106" y="138" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="cancelRefund_f3_di" bpmnElement="cancelRefund_f3">
+        <di:waypoint x="2142" y="138" />
+        <di:waypoint x="2194" y="138" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="cancelAlternativeReservation_f1_di" bpmnElement="cancelAlternativeReservation_f1">
+        <di:waypoint x="1426" y="1288" />
+        <di:waypoint x="1478" y="1288" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="cancelAlternativeReservation_f2_di" bpmnElement="cancelAlternativeReservation_f2">
+        <di:waypoint x="1514" y="1288" />
+        <di:waypoint x="1566" y="1288" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="cancelAlternativeReservation_f3_di" bpmnElement="cancelAlternativeReservation_f3">
+        <di:waypoint x="1602" y="1288" />
+        <di:waypoint x="1654" y="1288" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="revertReservationAdjustment_f1_di" bpmnElement="revertReservationAdjustment_f1">
+        <di:waypoint x="1846" y="1288" />
+        <di:waypoint x="1898" y="1288" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="revertReservationAdjustment_f2_di" bpmnElement="revertReservationAdjustment_f2">
+        <di:waypoint x="1934" y="1288" />
+        <di:waypoint x="1986" y="1288" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="revertReservationAdjustment_f3_di" bpmnElement="revertReservationAdjustment_f3">
+        <di:waypoint x="2022" y="1288" />
+        <di:waypoint x="2074" y="1288" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_setReservationOverbookingStatus_di" bpmnElement="Assoc_setReservationOverbookingStatus">
+        <di:waypoint x="308" y="488" />
+        <di:waypoint x="308" y="730" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_registerIncidence_di" bpmnElement="Assoc_registerIncidence">
+        <di:waypoint x="728" y="488" />
+        <di:waypoint x="728" y="730" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_refundReservation_di" bpmnElement="Assoc_refundReservation">
+        <di:waypoint x="1418" y="312" />
+        <di:waypoint x="1418" y="260" />
+        <di:waypoint x="2080" y="260" />
+        <di:waypoint x="2080" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_doWalk_di" bpmnElement="Assoc_doWalk">
+        <di:waypoint x="1418" y="888" />
+        <di:waypoint x="1418" y="1230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_adjustReservation_di" bpmnElement="Assoc_adjustReservation">
+        <di:waypoint x="1838" y="888" />
+        <di:waypoint x="1838" y="1230" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
