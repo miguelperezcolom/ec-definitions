@@ -50,8 +50,9 @@ steps:
     type: USER_TASK
     name: Verify payment received
     formId: verify-payment
+    topic: forms
     preconditionStepId: start
-    timeout: PT30S
+    timeout: PT5M
     onTimeoutStepId: cancel-booking
 
   # The step ids of these two are a contract, not a label: the booking service switches on the
