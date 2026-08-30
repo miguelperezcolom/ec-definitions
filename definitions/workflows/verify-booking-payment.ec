@@ -52,7 +52,9 @@ steps:
     formId: verify-payment
     topic: forms
     preconditionStepId: start
-    timeout: PT5M
+    # Shortened to 40s for the live demo, so the timeout path (cancel-booking) fires on stage
+    # rather than five minutes later. Restore to PT5M for a realistic runbook.
+    timeout: PT40S
     onTimeoutStepId: cancel-booking
 
   # The step ids of these two are a contract, not a label: the booking service switches on the
