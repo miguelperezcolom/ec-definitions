@@ -8,31 +8,14 @@ steps:
   - id: start
     type: START
     name: Start
-  - id: verify-payment
-    type: USER_TASK
-    name: Verify payment received
-    formId: verify-payment
-    topic: forms
-    preconditionStepId: start
-    timeout: 300000
-    onTimeoutStepId: cancel-booking
   - id: confirm-booking
     type: ACTION
     name: Confirm booking
     topic: booking
     preconditions:
-      - stepId: verify-payment
-        expression: paymentReceived == 'true'
-  - id: cancel-booking
-    type: ACTION
-    name: Cancel booking
-    topic: booking
-    preconditions:
-      - stepId: verify-payment
-        expression: paymentReceived == 'false'
+      - stepId: start
   - id: end
     type: END
     name: End
     preconditions:
-      - stepId: cancel-booking
       - stepId: confirm-booking
