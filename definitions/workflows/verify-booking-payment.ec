@@ -30,14 +30,9 @@ steps:
     preconditions:
       - stepId: verify-payment
         expression: paymentReceived == 'false'
-  - id: done
-    type: JOIN
-    name: Done
-    joinType: XOR
-    preconditionStepIds:
-      - confirm-booking
-      - cancel-booking
   - id: end
     type: END
     name: End
-    preconditionStepId: done
+    preconditions:
+      - stepId: cancel-booking
+      - stepId: confirm-booking
