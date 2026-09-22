@@ -2,9 +2,7 @@ id: proyectar-interlocutor
 name: Proyectar interlocutor
 version: 1
 description: >-
-  Integración CRS → PMS (PoC ACL). Asegura en Opera el perfil de un interlocutor del maestro — agencia,
-  turoperador, empresa — y registra a qué perfil corresponde, lo que reanuda las reservas que esperaban por él.
-  Un perfil es de cadena en Opera: una vez, no una por hotel (R12).
+  Integración CRS → PMS (PoC ACL): asegura en Opera el perfil de un interlocutor, una vez para la cadena (R12), y reanuda las reservas que esperaban por él.
 steps:
   - id: start
     type: START

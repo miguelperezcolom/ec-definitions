@@ -2,11 +2,7 @@ id: proyectar-reserva
 name: Proyectar reserva
 version: 1
 description: >-
-  Integración CRS → PMS (PoC ACL). Graba en Opera una reserva creada o modificada en el CRS: prepara todas las
-  traducciones, asegura el perfil del huésped, graba la reserva por su localizador con la guarda de versión y
-  anota en el CRS dónde quedó. Lo que no puede resolverse solo — un código sin equivalencia, un interlocutor que
-  no está en el PMS, un rechazo de Opera — no falla: el proceso espera a que se resuelva la causa y entonces
-  relanza una instancia nueva, que vuelve a leer la reserva. Lo transitorio se reintenta sin límite práctico.
+  Integración CRS → PMS (PoC ACL): graba en Opera una reserva creada o modificada en el CRS. Lo que no se resuelve solo espera a su causa y relanza una instancia nueva; lo transitorio se reintenta.
 steps:
   - id: start
     type: START

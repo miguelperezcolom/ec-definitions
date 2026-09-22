@@ -2,9 +2,7 @@ id: proyectar-cancelacion
 name: Proyectar cancelación
 version: 1
 description: >-
-  Integración CRS → PMS (PoC ACL). Cancela en Opera una reserva cancelada en el CRS, con el motivo traducido. Si
-  la reserva todavía no está en Opera, la cancelación no se descarta: espera a que «Proyectar reserva» la grabe y
-  entonces la cancela, para que el PMS conserve el registro (R37). La penalización en el folio queda fuera de la PoC.
+  Integración CRS → PMS (PoC ACL): cancela en Opera una reserva cancelada en el CRS. Si aún no está en Opera, espera a que se proyecte y entonces la cancela (R37).
 steps:
   - id: start
     type: START
