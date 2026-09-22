@@ -84,17 +84,10 @@ steps:
     preconditions:
       - stepId: relaunch-profile
 
-  # ── Grabar la reserva, serializado por reserva ──────────────────────────────
-  # OHIP no tiene escritura condicional: leer la versión del UDF y escribir son dos llamadas. El LOCK
-  # hace que dos procesos de la misma reserva no las intercalen, que es lo que el HLA pide del
-  # compare-and-set (R18).
-  - id: lock
-    type: LOCK
-    name: Bloquear la reserva
-    lockName: reservation
-    lockKey: hotelCode + '/' + locator
-    preconditions:
-      - stepId: profiled
+  # ── Grabar la reserva ───────────────────────────────────────────────────────
+  # Leer la versión del UDF y escribir son dos llamadas a OHIP, sin escritura condicional. El
+  # conector las serializa por reserva. El LOCK del motor sería el sitio (R18), pero en 2.18.0 falla
+  # sobre PostgreSQL: su clave lleva un carácter NUL que PostgreSQL no admite en un texto.
   - id: upsert-reservation
     type: ACTION
     name: Grabar la reserva en Opera
@@ -102,19 +95,12 @@ steps:
     timeout: PT2M
     retries: 10000
     preconditions:
-      - stepId: lock
-  - id: unlock
-    type: UNLOCK
-    name: Desbloquear la reserva
-    lockName: reservation
-    lockKey: hotelCode + '/' + locator
-    preconditions:
-      - stepId: upsert-reservation
+      - stepId: profiled
   - id: written
     type: CHOICE
     name: ¿Grabada?
     preconditions:
-      - stepId: unlock
+      - stepId: upsert-reservation
   - id: wait-write
     type: WAIT_FOR_MESSAGE
     name: Esperar a que se resuelvan las causas

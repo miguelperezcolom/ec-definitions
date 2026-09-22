@@ -43,13 +43,6 @@ steps:
     name: Relanzado
     preconditions:
       - stepId: relaunch-prepare
-  - id: lock
-    type: LOCK
-    name: Bloquear la reserva
-    lockName: reservation
-    lockKey: hotelCode + '/' + locator
-    preconditions:
-      - stepId: prepared
   - id: cancel-reservation
     type: ACTION
     name: Cancelar en Opera
@@ -57,19 +50,12 @@ steps:
     timeout: PT2M
     retries: 10000
     preconditions:
-      - stepId: lock
-  - id: unlock
-    type: UNLOCK
-    name: Desbloquear la reserva
-    lockName: reservation
-    lockKey: hotelCode + '/' + locator
-    preconditions:
-      - stepId: cancel-reservation
+      - stepId: prepared
   - id: cancelled
     type: CHOICE
     name: ¿Cancelada?
     preconditions:
-      - stepId: unlock
+      - stepId: cancel-reservation
   - id: wait-cancel
     type: WAIT_FOR_MESSAGE
     name: Esperar (p. ej. a que la reserva llegue al PMS)
