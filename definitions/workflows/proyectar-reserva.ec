@@ -142,8 +142,19 @@ steps:
     retries: 10000
     preconditions:
       - stepId: annotate-pms-reference
+  # ── El front office del hotel: la misma reserva, como estancia por llegar ────
+  # Solo para los hoteles que tienen uno; para el resto el paso no hace nada. Si no responde, se
+  # reintenta; nunca bloquea lo que ya está en Opera.
+  - id: write-front-office
+    type: ACTION
+    name: Grabar la reserva en el front office
+    topic: pms-integration
+    timeout: PT2M
+    retries: 10000
+    preconditions:
+      - stepId: resolve-projection
   - id: end
     type: END
     name: Proyectada
     preconditions:
-      - stepId: resolve-projection
+      - stepId: write-front-office

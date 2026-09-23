@@ -79,8 +79,19 @@ steps:
     name: Relanzado
     preconditions:
       - stepId: relaunch-cancel
+  # ── El front office del hotel: su estancia, cancelada ──────────────────────
+  # Solo si el hotel tiene uno. Una estancia ya en casa no se cancela desde el CRS: es cosa de
+  # recepción, y el paso termina igual.
+  - id: cancel-front-office
+    type: ACTION
+    name: Cancelar la estancia en el front office
+    topic: pms-integration
+    timeout: PT2M
+    retries: 10000
+    preconditions:
+      - stepId: cancelled
   - id: end
     type: END
     name: Cancelada
     preconditions:
-      - stepId: cancelled
+      - stepId: cancel-front-office
