@@ -2,7 +2,7 @@ id: proyectar-interlocutor
 name: Proyectar interlocutor
 version: 1
 description: >-
-  Integración CRS → PMS (PoC ACL): asegura en Opera el perfil de un interlocutor, una vez para la cadena (R12), y reanuda las reservas que esperaban por él.
+  Integración CRS → PMS (PoC ACL): exporta un interlocutor del ERP a Opera —el perfil que el ERP ya conoce, el que tenga su CorporateId o uno nuevo—, anota en el ERP cuál es y reanuda las reservas que lo esperaban.
 steps:
   - id: start
     type: START
@@ -87,8 +87,16 @@ steps:
     retries: 10000
     preconditions:
       - stepId: profiled
+  - id: annotate-partner-profile
+    type: ACTION
+    name: Anotar en el ERP su perfil en Opera
+    topic: crs-integration
+    timeout: PT2M
+    retries: 10000
+    preconditions:
+      - stepId: record-partner-profile
   - id: end
     type: END
     name: Proyectado
     preconditions:
-      - stepId: record-partner-profile
+      - stepId: annotate-partner-profile
