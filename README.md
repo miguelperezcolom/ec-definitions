@@ -46,9 +46,8 @@ que todo paso sin precondición sea un `START` o un `WAIT_FOR_MESSAGE`.
 Un error se ve así, citando el fichero:
 
 ```
-definitions/workflows/order-fulfilment.ec:
-  - Step 'ship-order' references unknown precondition step 'reviw-shipping'.
-  - Step 'cancel-order' references unknown precondition step 'reviw-shipping'.
+definitions/workflows/proyectar-reserva.ec:
+  - Step 'upsert-reservation' references unknown precondition step 'profild'.
 ```
 
 `mvn eventconductor:validate` hace lo mismo sin pasar por el ciclo de vida.
@@ -84,8 +83,9 @@ exactamente eso, y ese paso es lo que impide que vuelva a pasar en silencio.
 La referencia de cada campo está en las guías de
 [workflows](https://github.com/miguelperezcolom/eventconductor/blob/main/doc/src/content/docs/guides/workflow-definitions.md)
 y [formularios](https://github.com/miguelperezcolom/eventconductor/blob/main/doc/src/content/docs/guides/form-definitions.md).
-`definitions/workflows/order-fulfilment.ec` es el ejemplo largo: usa fork/join, tarea humana,
-timeouts, reintentos y compensación saga, y está comentado paso a paso.
+`definitions/workflows/proyectar-reserva.ec` es el ejemplo largo: decisiones, esperas a un
+mensaje y relanzamientos. Aquí sólo están los procesos de la PoC; los ejemplos del motor
+(fork/join, tareas humanas, sagas) están en su repositorio.
 
 ## Cómo llegan al motor
 

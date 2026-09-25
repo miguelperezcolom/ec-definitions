@@ -44,6 +44,9 @@
                     <rulesDirectory>${ec.definitions.dir}/rules</rulesDirectory>
                     <!-- Un directorio vacío es un directorio movido o renombrado, no un visto bueno. -->
                     <failOnMissing>true</failOnMissing>
+                    <!-- Ningún proceso tiene hoy una tarea humana, así que no hay formularios; ponlo a
+                         true al añadir uno en definitions/forms. -->
+                    <validateForms>false</validateForms>
                     <!-- Todavía no hay reglas en este repositorio; ponlo a true al añadir definitions/rules. -->
                     <validateRules>false</validateRules>
                     <!-- Ni contratos de tareas (.ectask): los pasos de la integración no los usan todavía. -->
