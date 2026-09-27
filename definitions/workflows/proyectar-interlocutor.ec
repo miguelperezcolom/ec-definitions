@@ -9,6 +9,7 @@ steps:
     name: Start
   - id: prepare
     type: ACTION
+    task: prepare-partner
     name: Preparar (tipo de perfil)
     topic: mapping
     timeout: PT2M
@@ -32,6 +33,7 @@ steps:
         expression: prepareOutcome == 'WAIT'
   - id: relaunch-prepare
     type: ACTION
+    task: relaunch-process
     name: Relanzar
     topic: mapping
     timeout: PT2M
@@ -45,6 +47,7 @@ steps:
       - stepId: relaunch-prepare
   - id: ensure-partner-profile
     type: ACTION
+    task: ensure-partner-profile
     name: Asegurar el perfil en Opera
     topic: pms-integration
     timeout: PT2M
@@ -68,6 +71,7 @@ steps:
         expression: profileOutcome == 'WAIT'
   - id: relaunch-profile
     type: ACTION
+    task: relaunch-process
     name: Relanzar
     topic: mapping
     timeout: PT2M
@@ -81,6 +85,7 @@ steps:
       - stepId: relaunch-profile
   - id: record-partner-profile
     type: ACTION
+    task: record-partner-profile
     name: Registrar la correspondencia
     topic: mapping
     timeout: PT2M
@@ -89,6 +94,7 @@ steps:
       - stepId: profiled
   - id: annotate-partner-profile
     type: ACTION
+    task: annotate-partner-profile
     name: Anotar en el ERP su perfil en Opera
     topic: crs-integration
     timeout: PT2M

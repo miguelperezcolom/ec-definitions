@@ -11,6 +11,7 @@ steps:
   # ── Preparar: local, no toca el PMS ─────────────────────────────────────────
   - id: prepare
     type: ACTION
+    task: prepare-reservation
     name: Preparar (resolver todas las traducciones)
     topic: mapping
     timeout: PT2M
@@ -34,6 +35,7 @@ steps:
         expression: prepareOutcome == 'WAIT'
   - id: relaunch-prepare
     type: ACTION
+    task: relaunch-process
     name: Relanzar (releer la reserva)
     topic: mapping
     timeout: PT2M
@@ -49,6 +51,7 @@ steps:
   # ── Perfil del huésped ──────────────────────────────────────────────────────
   - id: ensure-guest-profile
     type: ACTION
+    task: ensure-guest-profile
     name: Asegurar el perfil del huésped
     topic: pms-integration
     timeout: PT2M
@@ -72,6 +75,7 @@ steps:
         expression: profileOutcome == 'WAIT'
   - id: relaunch-profile
     type: ACTION
+    task: relaunch-process
     name: Relanzar (releer la reserva)
     topic: mapping
     timeout: PT2M
@@ -85,22 +89,37 @@ steps:
       - stepId: relaunch-profile
 
   # ── Grabar la reserva ───────────────────────────────────────────────────────
-  # Leer la versión del UDF y escribir son dos llamadas a OHIP, sin escritura condicional. El
-  # conector las serializa por reserva. El LOCK del motor sería el sitio (R18), pero en 2.18.0 falla
-  # sobre PostgreSQL: su clave lleva un carácter NUL que PostgreSQL no admite en un texto.
+  # Leer la versión del UDF y escribir son dos llamadas a OHIP, sin escritura condicional: el LOCK
+  # del motor las serializa por reserva (R18), también frente a «proyectar-cancelacion», que toma el
+  # mismo candado. Solo alrededor de la escritura: un proceso que espera a sus causas no lo retiene.
+  - id: lock-write
+    type: LOCK
+    name: Tomar el candado de la reserva
+    lockName: reservation
+    lockKey: hotelCode + '/' + locator
+    preconditions:
+      - stepId: profiled
   - id: upsert-reservation
     type: ACTION
+    task: upsert-reservation
     name: Grabar la reserva en Opera
     topic: pms-integration
     timeout: PT2M
     retries: 10000
     preconditions:
-      - stepId: profiled
+      - stepId: lock-write
+  - id: unlock-write
+    type: UNLOCK
+    name: Soltar el candado de la reserva
+    lockName: reservation
+    lockKey: hotelCode + '/' + locator
+    preconditions:
+      - stepId: upsert-reservation
   - id: written
     type: CHOICE
     name: ¿Grabada?
     preconditions:
-      - stepId: upsert-reservation
+      - stepId: unlock-write
   - id: wait-write
     type: WAIT_FOR_MESSAGE
     name: Esperar a que se resuelvan las causas
@@ -113,6 +132,7 @@ steps:
         expression: writeOutcome == 'WAIT'
   - id: relaunch-write
     type: ACTION
+    task: relaunch-process
     name: Relanzar (releer la reserva)
     topic: mapping
     timeout: PT2M
@@ -128,6 +148,7 @@ steps:
   # ── Anotar en el CRS y liberar las cancelaciones que esperaban ──────────────
   - id: annotate-pms-reference
     type: ACTION
+    task: annotate-pms-reference
     name: Anotar la referencia del PMS en el CRS
     topic: crs-integration
     timeout: PT2M
@@ -136,6 +157,7 @@ steps:
       - stepId: written
   - id: resolve-projection
     type: ACTION
+    task: resolve-projection
     name: Liberar lo que esperaba a que llegase al PMS
     topic: mapping
     timeout: PT2M
