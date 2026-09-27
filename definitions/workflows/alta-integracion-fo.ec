@@ -2,7 +2,7 @@ id: alta-integracion-fo
 name: Alta de integración PMS → front office
 version: 1
 description: >-
-  Integración PMS → front office (pms-fo, PoC ACL): el ciclo de vida de la integración que alimenta el front office de un hotel desde su PMS, del registro a la activación, por puertas — conexión, catálogo del PMS en el front office, backfill y activación. Cada paso lo hace integrations-service; cada espera se abre cuando ocurre lo que espera.
+  Integración PMS → front office (pms-fo): el alta, por puertas — conexión con Opera y el front office, catálogo del PMS en el front office, backfill y activación. Cada paso lo hace integrations-service.
 steps:
   - id: start
     type: START
