@@ -1,0 +1,34 @@
+id: ensure-partner-profile
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  El interlocutor del ERP como perfil de Opera: el que el ERP ya conoce, el que Opera tenga con su
+  CorporateId o uno nuevo. Si falta la equivalencia de su tipo o Opera lo rechaza, abre la causa y el
+  proceso espera (WAIT).
+input:
+  partnerCode:
+    type: string
+    required: true
+  processKey:
+    type: string
+    required: true
+  definitionId:
+    type: string
+    required: true
+  version:
+    type: integer
+  eventId:
+    type: string
+  origin:
+    type: string
+output:
+  profileOutcome:
+    type: string
+    description: OK, STALE (ya lo era) o WAIT
+  pmsProfileIds:
+    type: string
+    description: el perfil del interlocutor en Opera
+  pmsProfileType:
+    type: string
+    description: Agent, Company, Source…

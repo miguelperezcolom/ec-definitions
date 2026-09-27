@@ -1,0 +1,17 @@
+id: project-stay
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  Relee de Opera una reserva —del CRS o nacida en Opera— y la manda al front office como estancia
+  (front-office-commands), con el titular que diga el MDM. El front office la ordena por la última
+  modificación de Opera: proyectarla dos veces, o tarde, la deja en la última.
+input:
+  pmsHotelCode:
+    type: string
+    required: true
+    description: la propiedad de Opera
+  pmsReservationId:
+    type: string
+    required: true
+    description: la reserva en Opera

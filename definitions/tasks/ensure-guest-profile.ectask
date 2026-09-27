@@ -1,0 +1,41 @@
+id: ensure-guest-profile
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  Asegura en Opera el perfil del huésped titular de una reserva: quién es lo dice el MDM de clientes
+  (Salesforce), y lo que el MDM no sabe, la reserva. Si Opera ya tiene esta versión de la reserva, no
+  se escribe (salvo que el MDM la proyecte para reescribir al huésped). Si Opera lo rechaza o falta la
+  equivalencia del hotel, abre la causa y el proceso espera (WAIT).
+input:
+  hotelCode:
+    type: string
+    required: true
+  locator:
+    type: string
+    required: true
+  processKey:
+    type: string
+    required: true
+    description: la clave con que el proceso espera sus causas
+  definitionId:
+    type: string
+    required: true
+    description: la definición del proceso, para relanzarlo igual
+  version:
+    type: integer
+  eventId:
+    type: string
+  origin:
+    type: string
+    description: mdm-… cuando lo proyecta el MDM para reescribir al huésped
+output:
+  profileOutcome:
+    type: string
+    description: OK o WAIT
+  guestProfileId:
+    type: string
+    description: el perfil del huésped en Opera
+  customerId:
+    type: string
+    description: el cliente del MDM que es el titular, si el MDM respondió
