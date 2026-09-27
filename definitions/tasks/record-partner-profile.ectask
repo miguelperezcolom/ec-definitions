@@ -1,0 +1,19 @@
+id: record-partner-profile
+version: 1
+group: mapping
+topic: mapping
+description: >-
+  Registra qué perfil del PMS es el interlocutor, y en qué versión, y reanuda las reservas que
+  esperaban a que existiera en el PMS.
+input:
+  partnerCode:
+    type: string
+    required: true
+  pmsProfileIds:
+    type: string
+    required: true
+  pmsProfileType:
+    type: string
+  version:
+    type: integer
+    required: true

@@ -1,0 +1,10 @@
+id: fo-verify-connectivity
+version: 1
+group: integrations
+topic: integrations
+description: >-
+  Alta de integración pms-fo: verifica la conexión con Opera y con el front office.
+input:
+  integrationId:
+    type: string
+    required: true

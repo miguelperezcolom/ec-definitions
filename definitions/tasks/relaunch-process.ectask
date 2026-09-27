@@ -1,0 +1,15 @@
+id: relaunch-process
+version: 1
+group: mapping
+topic: mapping
+description: >-
+  Un proceso que esperaba sus causas y ya no tiene ninguna abierta pide su sucesor: una instancia
+  nueva de sí mismo, que lee otra vez lo que proyecta. Dos veces, un sucesor.
+input:
+  processKey:
+    type: string
+    required: true
+output:
+  successorKey:
+    type: string
+    description: la clave del proceso sucesor

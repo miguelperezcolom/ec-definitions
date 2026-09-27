@@ -1,0 +1,18 @@
+id: annotate-partner-profile
+version: 1
+group: crs-integration
+topic: crs-integration
+description: >-
+  Anota en el maestro de interlocutores (ERP) qué perfil es el interlocutor en el PMS. Un comando
+  por el outbox de crs-integration.
+input:
+  partnerCode:
+    type: string
+    required: true
+  pmsProfileIds:
+    type: string
+    required: true
+    description: el perfil del PMS que el conector creó o encontró
+  pmsProfileType:
+    type: string
+    description: Agent, Company, Source…

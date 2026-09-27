@@ -1,0 +1,27 @@
+id: prepare-partner
+version: 1
+group: mapping
+topic: mapping
+description: >-
+  Prepara la proyección de un interlocutor: lo lee del ERP y comprueba sus equivalencias. Si falta
+  alguna, abre sus causas y el proceso espera (WAIT).
+input:
+  partnerCode:
+    type: string
+    required: true
+  processKey:
+    type: string
+    required: true
+  definitionId:
+    type: string
+    required: true
+  version:
+    type: integer
+  eventId:
+    type: string
+  origin:
+    type: string
+output:
+  prepareOutcome:
+    type: string
+    description: OK, WAIT o SKIP

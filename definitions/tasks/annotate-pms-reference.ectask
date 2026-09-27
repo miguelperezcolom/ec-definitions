@@ -1,0 +1,16 @@
+id: annotate-pms-reference
+version: 1
+group: crs-integration
+topic: crs-integration
+description: >-
+  Anota en el CRS el id que la reserva tiene en el PMS. Un comando a booking por el outbox de
+  crs-integration, con el id de la ejecución: dos veces es una.
+input:
+  locator:
+    type: string
+    required: true
+    description: el localizador de la reserva en el CRS
+  pmsReservationId:
+    type: string
+    required: true
+    description: el id de la reserva en el PMS

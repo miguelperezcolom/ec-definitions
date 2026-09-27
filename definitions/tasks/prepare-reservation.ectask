@@ -1,0 +1,33 @@
+id: prepare-reservation
+version: 1
+group: mapping
+topic: mapping
+description: >-
+  Prepara una reserva, antes de proyectarla: lee la reserva del CRS y comprueba que todos sus códigos tienen equivalencia en el
+  PMS. Si falta alguna, abre sus causas y el proceso espera (WAIT) a que se resuelvan.
+input:
+  hotelCode:
+    type: string
+    required: true
+  locator:
+    type: string
+    required: true
+  processKey:
+    type: string
+    required: true
+    description: la clave con que el proceso espera sus causas
+  definitionId:
+    type: string
+    required: true
+    description: la definición del proceso, para relanzarlo igual
+  version:
+    type: integer
+  eventId:
+    type: string
+  origin:
+    type: string
+    description: backfill:<run> cuando no lo empezó un cambio en el CRS
+output:
+  prepareOutcome:
+    type: string
+    description: OK, WAIT o SKIP

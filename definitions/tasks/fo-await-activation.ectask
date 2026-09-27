@@ -1,0 +1,10 @@
+id: fo-await-activation
+version: 1
+group: integrations
+topic: integrations
+description: >-
+  Alta de integración pms-fo: la integración queda lista para activar; espera a que una persona la active.
+input:
+  integrationId:
+    type: string
+    required: true

@@ -1,0 +1,10 @@
+id: verify-connectivity
+version: 1
+group: integrations
+topic: integrations
+description: >-
+  Alta de integración (CRS → PMS): verifica la conectividad con Opera; la puerta de la conectividad se abre cuando responde.
+input:
+  integrationId:
+    type: string
+    required: true

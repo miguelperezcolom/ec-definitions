@@ -1,0 +1,12 @@
+id: register-no-show
+version: 1
+group: booking
+topic: booking
+description: >-
+  El CRS registra el no-show de una reserva: la cancela con motivo NOS y la deja costando su cargo.
+  Una vez: el mismo aviso dos veces es un solo no-show.
+input:
+  bookingId:
+    type: string
+    required: true
+    description: el localizador de la reserva en el CRS

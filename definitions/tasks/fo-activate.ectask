@@ -1,0 +1,10 @@
+id: fo-activate
+version: 1
+group: integrations
+topic: integrations
+description: >-
+  Alta de integración pms-fo: activa la integración; los cambios de Opera fluyen al front office.
+input:
+  integrationId:
+    type: string
+    required: true

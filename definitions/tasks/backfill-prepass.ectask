@@ -1,0 +1,10 @@
+id: backfill-prepass
+version: 1
+group: integrations
+topic: integrations
+description: >-
+  Alta de integración: pasada previa del backfill.
+input:
+  integrationId:
+    type: string
+    required: true
