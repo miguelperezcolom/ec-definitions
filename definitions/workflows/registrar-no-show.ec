@@ -11,6 +11,7 @@ steps:
   # porcentaje de su precio original. Una vez: el mismo aviso dos veces es un solo no-show.
   - id: register-no-show
     type: ACTION
+    task: register-no-show
     name: Registrar el no-show en el CRS
     topic: booking
     timeout: PT2M
