@@ -10,6 +10,7 @@ steps:
 
   - id: verify-connectivity
     type: ACTION
+    task: verify-connectivity
     name: Verificar la conectividad con Opera
     topic: integrations
     timeout: PT2M
@@ -28,6 +29,7 @@ steps:
 
   - id: contrast-catalogues
     type: ACTION
+    task: contrast-catalogues
     name: Contrastar los catálogos de la propiedad y del CRS
     topic: integrations
     timeout: PT2M
@@ -46,6 +48,7 @@ steps:
 
   - id: request-mapping
     type: ACTION
+    task: request-mapping
     name: Pedir el mapeado del hotel
     topic: integrations
     timeout: PT2M
@@ -64,6 +67,7 @@ steps:
 
   - id: sync-partners
     type: ACTION
+    task: sync-partners
     name: Sincronizar los interlocutores de las reservas del hotel
     topic: integrations
     timeout: PT2M
@@ -82,6 +86,7 @@ steps:
 
   - id: backfill-prepass
     type: ACTION
+    task: backfill-prepass
     name: Pasada previa del backfill
     topic: integrations
     timeout: PT2M
@@ -100,6 +105,7 @@ steps:
 
   - id: start-backfill
     type: ACTION
+    task: start-backfill
     name: Iniciar el backfill (llegada más próxima primero)
     topic: integrations
     timeout: PT2M
@@ -118,6 +124,7 @@ steps:
 
   - id: await-activation
     type: ACTION
+    task: await-activation
     name: Lista para activar
     topic: integrations
     timeout: PT2M
@@ -136,6 +143,7 @@ steps:
 
   - id: activate
     type: ACTION
+    task: activate
     name: Activar (el tráfico en tiempo real fluye)
     topic: integrations
     timeout: PT2M

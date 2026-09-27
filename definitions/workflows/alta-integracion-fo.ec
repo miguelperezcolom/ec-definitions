@@ -10,6 +10,7 @@ steps:
 
   - id: fo-verify-connectivity
     type: ACTION
+    task: fo-verify-connectivity
     name: Verificar la conexión con Opera y con el front office
     topic: integrations
     timeout: PT2M
@@ -28,6 +29,7 @@ steps:
 
   - id: fo-sync-catalogue
     type: ACTION
+    task: fo-sync-catalogue
     name: Llevar el catálogo del PMS al front office
     topic: integrations
     timeout: PT2M
@@ -46,6 +48,7 @@ steps:
 
   - id: fo-start-backfill
     type: ACTION
+    task: fo-start-backfill
     name: Iniciar el backfill (las reservas de Opera de la ventana)
     topic: integrations
     timeout: PT2M
@@ -64,6 +67,7 @@ steps:
 
   - id: fo-await-activation
     type: ACTION
+    task: fo-await-activation
     name: Lista para activar
     topic: integrations
     timeout: PT2M
@@ -82,6 +86,7 @@ steps:
 
   - id: fo-activate
     type: ACTION
+    task: fo-activate
     name: Activar (los cambios de Opera fluyen al front office)
     topic: integrations
     timeout: PT2M
