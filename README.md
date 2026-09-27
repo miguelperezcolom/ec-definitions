@@ -31,7 +31,7 @@ mvn verify
 ```
 
 ```
-EventConductor: 6 definition(s) validated successfully.
+EventConductor: 5 definition(s) validated successfully.
 ```
 
 El `pom.xml` sólo existe para esto: no compila nada, no produce artefacto. Ejecuta el
