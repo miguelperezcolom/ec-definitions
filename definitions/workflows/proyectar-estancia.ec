@@ -9,6 +9,7 @@ steps:
     name: Start
   - id: project-stay
     type: ACTION
+    task: project-stay
     name: Leer la reserva de Opera y grabarla como estancia
     topic: pms-integration
     timeout: PT2M

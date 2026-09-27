@@ -9,6 +9,7 @@ steps:
     name: Start
   - id: prepare
     type: ACTION
+    task: prepare-cancellation
     name: Preparar (hotel y motivo)
     topic: mapping
     timeout: PT2M
@@ -32,6 +33,7 @@ steps:
         expression: prepareOutcome == 'WAIT'
   - id: relaunch-prepare
     type: ACTION
+    task: relaunch-process
     name: Relanzar
     topic: mapping
     timeout: PT2M
@@ -43,19 +45,37 @@ steps:
     name: Relanzado
     preconditions:
       - stepId: relaunch-prepare
+  # Leer la reserva en Opera y cancelarla, serializado por reserva con el mismo candado que
+  # «proyectar-reserva» toma para grabarla (R18). Solo alrededor de la escritura: si la reserva aún no
+  # está en Opera, se espera a que llegue sin retener el candado que su proyección necesita.
+  - id: lock-cancel
+    type: LOCK
+    name: Tomar el candado de la reserva
+    lockName: reservation
+    lockKey: hotelCode + '/' + locator
+    preconditions:
+      - stepId: prepared
   - id: cancel-reservation
     type: ACTION
+    task: cancel-reservation
     name: Cancelar en Opera
     topic: pms-integration
     timeout: PT2M
     retries: 10000
     preconditions:
-      - stepId: prepared
+      - stepId: lock-cancel
+  - id: unlock-cancel
+    type: UNLOCK
+    name: Soltar el candado de la reserva
+    lockName: reservation
+    lockKey: hotelCode + '/' + locator
+    preconditions:
+      - stepId: cancel-reservation
   - id: cancelled
     type: CHOICE
     name: ¿Cancelada?
     preconditions:
-      - stepId: cancel-reservation
+      - stepId: unlock-cancel
   - id: wait-cancel
     type: WAIT_FOR_MESSAGE
     name: Esperar (p. ej. a que la reserva llegue al PMS)
@@ -68,6 +88,7 @@ steps:
         expression: writeOutcome == 'WAIT'
   - id: relaunch-cancel
     type: ACTION
+    task: relaunch-process
     name: Relanzar
     topic: mapping
     timeout: PT2M
