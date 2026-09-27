@@ -1,0 +1,34 @@
+id: cancel-reservation
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  Cancela en Opera una reserva cancelada en el CRS, con su motivo; un no-show deja antes su cargo en
+  la reserva. Si Opera aún no la tiene, espera a que se proyecte (R37): WAIT, como lo que falte de
+  mapeo o un rechazo de Opera.
+input:
+  hotelCode:
+    type: string
+    required: true
+  locator:
+    type: string
+    required: true
+  processKey:
+    type: string
+    required: true
+  definitionId:
+    type: string
+    required: true
+  version:
+    type: integer
+  eventId:
+    type: string
+  origin:
+    type: string
+output:
+  writeOutcome:
+    type: string
+    description: DONE, STALE (ya cancelada) o WAIT
+  pmsReservationId:
+    type: string
+    description: la reserva en Opera

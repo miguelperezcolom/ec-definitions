@@ -1,0 +1,39 @@
+id: upsert-reservation
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  Graba la reserva en Opera: la busca por el localizador del CRS, compara la versión que Opera tiene
+  (su UDF) con la que se graba, y crea o modifica —o no escribe nada si Opera ya tiene esta o una más
+  nueva (STALE)—. Publica pms-reservations para quien consume el PMS. Lo que no se puede grabar
+  (equivalencia que falta, rechazo de Opera) abre su causa y el proceso espera (WAIT).
+input:
+  hotelCode:
+    type: string
+    required: true
+  locator:
+    type: string
+    required: true
+  processKey:
+    type: string
+    required: true
+  definitionId:
+    type: string
+    required: true
+  guestProfileId:
+    type: string
+    required: true
+    description: el perfil que ensure-guest-profile aseguró
+  version:
+    type: integer
+  eventId:
+    type: string
+  origin:
+    type: string
+output:
+  writeOutcome:
+    type: string
+    description: DONE, STALE o WAIT
+  pmsReservationId:
+    type: string
+    description: la reserva en Opera
