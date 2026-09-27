@@ -142,19 +142,11 @@ steps:
     retries: 10000
     preconditions:
       - stepId: annotate-pms-reference
-  # ── El front office del hotel: la misma reserva, como estancia por llegar ────
-  # Solo para los hoteles que tienen uno; para el resto el paso no hace nada. Si no responde, se
-  # reintenta; nunca bloquea lo que ya está en Opera.
-  - id: write-front-office
-    type: ACTION
-    name: Grabar la reserva en el front office
-    topic: pms-integration
-    timeout: PT2M
-    retries: 10000
-    preconditions:
-      - stepId: resolve-projection
+  # El front office ya no se graba desde aquí: cuelga del PMS (integración pms-fo). Al grabar en
+  # Opera, el conector publica pms-reservations y la integración pms-fo proyecta la estancia desde lo
+  # que Opera tiene («proyectar-estancia»).
   - id: end
     type: END
     name: Proyectada
     preconditions:
-      - stepId: write-front-office
+      - stepId: resolve-projection
