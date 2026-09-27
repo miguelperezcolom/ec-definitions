@@ -13,6 +13,7 @@ escribirla, falla cuando el motor la carga, y para entonces ya está desplegada.
 definitions/
   workflows/*.ec        procesos
   forms/*.ecform        formularios (los referencian los pasos USER_TASK por su id)
+  tasks/*.ectask        contratos de tareas (los referencian los pasos ACTION con `task: <id>`)
 ```
 
 Los ficheros son **YAML**. Las extensiones `.ec` y `.ecform` son las que registran el editor
@@ -112,3 +113,16 @@ Un `id` que ya existe se sobrescribe. Los detalles, incluido el webhook, en la
 - Requiere **JDK 21** y el plugin **2.3.0 o superior**. Bajar de ahí no da error: 2.3.0 es la
   primera versión que lee `.ec`, y las anteriores simplemente no encuentran nada y pasan en
   verde. Del lado del motor, `.ecrule` necesita **2.4.0 o superior** por la misma razón.
+
+## Contratos de tareas
+
+`definitions/tasks/*.ectask` es el contrato de cada tarea que un servicio de ec-demo1 implementa:
+`id`, `version`, `group` (el servicio), `topic` (a dónde la despacha el motor), y sus `input`/`output`.
+El servicio registra un handler por contrato (el runtime de workers del motor, `worker-kafka`), y el
+motor, al importar un workflow, fija cada `task: <id>` a `<id>@<última versión>` y la despacha con ese
+`taskId`. Los contratos son **append-only**: un cambio incompatible es una versión nueva, y la vieja no
+se borra mientras haya procesos que la usen.
+
+El orquestador importa los contratos **al arrancar** (antes que los workflows), no por el webhook:
+un contrato nuevo que un workflow referencia necesita un reinicio del orquestador antes de que ese
+workflow se importe, o la importación del workflow falla con "references unknown task".

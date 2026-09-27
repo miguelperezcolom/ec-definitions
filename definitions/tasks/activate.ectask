@@ -1,0 +1,10 @@
+id: activate
+version: 1
+group: integrations
+topic: integrations
+description: >-
+  Alta de integración: activa la integración; el tráfico en tiempo real fluye.
+input:
+  integrationId:
+    type: string
+    required: true

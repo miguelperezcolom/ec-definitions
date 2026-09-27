@@ -1,0 +1,10 @@
+id: start-backfill
+version: 1
+group: integrations
+topic: integrations
+description: >-
+  Alta de integración: inicia el backfill, la llegada más próxima primero.
+input:
+  integrationId:
+    type: string
+    required: true

@@ -18,7 +18,7 @@
 
         <!-- 2.3.0 es la primera versión que lee .ec/.ecform/.ecrule. Bajar de aquí
              no da error: el validador deja de ver los ficheros y pasa en verde. -->
-        <eventconductor.plugin.version>2.18.0</eventconductor.plugin.version>
+        <eventconductor.plugin.version>2.23.0</eventconductor.plugin.version>
 
         <ec.definitions.dir>${project.basedir}/definitions</ec.definitions.dir>
     </properties>
@@ -42,6 +42,7 @@
                     <workflowsDirectory>${ec.definitions.dir}/workflows</workflowsDirectory>
                     <formsDirectory>${ec.definitions.dir}/forms</formsDirectory>
                     <rulesDirectory>${ec.definitions.dir}/rules</rulesDirectory>
+                    <tasksDirectory>${ec.definitions.dir}/tasks</tasksDirectory>
                     <!-- Un directorio vacío es un directorio movido o renombrado, no un visto bueno. -->
                     <failOnMissing>true</failOnMissing>
                     <!-- Ningún proceso tiene hoy una tarea humana, así que no hay formularios; ponlo a
@@ -49,8 +50,9 @@
                     <validateForms>false</validateForms>
                     <!-- Todavía no hay reglas en este repositorio; ponlo a true al añadir definitions/rules. -->
                     <validateRules>false</validateRules>
-                    <!-- Ni contratos de tareas (.ectask): los pasos de la integración no los usan todavía. -->
-                    <validateTasks>false</validateTasks>
+                    <!-- Los contratos de las tareas (.ectask) que los pasos ACTION referencian con
+                         `task: <id>`: se validan contra el esquema, y cada referencia contra ellos. -->
+                    <validateTasks>true</validateTasks>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,0 +1,10 @@
+id: sync-partners
+version: 1
+group: integrations
+topic: integrations
+description: >-
+  Alta de integración: sincroniza con el PMS los interlocutores de las reservas del hotel.
+input:
+  integrationId:
+    type: string
+    required: true

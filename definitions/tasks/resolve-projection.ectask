@@ -1,0 +1,13 @@
+id: resolve-projection
+version: 1
+group: mapping
+topic: mapping
+description: >-
+  La reserva ya está en el PMS: resuelve la causa de la cancelación que esperaba a que se proyectara.
+input:
+  hotelCode:
+    type: string
+    required: true
+  locator:
+    type: string
+    required: true

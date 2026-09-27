@@ -1,0 +1,10 @@
+id: contrast-catalogues
+version: 1
+group: integrations
+topic: integrations
+description: >-
+  Alta de integración: contrasta los catálogos de la propiedad (Opera) y del CRS.
+input:
+  integrationId:
+    type: string
+    required: true

@@ -1,0 +1,10 @@
+id: request-mapping
+version: 1
+group: integrations
+topic: integrations
+description: >-
+  Alta de integración: pide al mapping el mapeado de los códigos del hotel.
+input:
+  integrationId:
+    type: string
+    required: true

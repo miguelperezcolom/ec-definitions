@@ -1,0 +1,10 @@
+id: fo-start-backfill
+version: 1
+group: integrations
+topic: integrations
+description: >-
+  Alta de integración pms-fo: inicia el backfill, las reservas de Opera de la ventana.
+input:
+  integrationId:
+    type: string
+    required: true
