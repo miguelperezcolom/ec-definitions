@@ -4,7 +4,8 @@ group: pms-integration
 topic: pms-integration
 description: >-
   Hace el check-out de la reserva en Opera (OHIP cashiering, POST checkOuts) con el cajero de la
-  integración. Idempotente: si Opera ya la tiene fuera, no escribe (STALE). Un rechazo de Opera —el
+  integración: antes de su fecha de salida, como salida anticipada (PUT earlyDeparture); el folio,
+  saldado con lo que cobró recepción (POST payments) y generado —la factura— (POST folios). Idempotente: si Opera ya la tiene fuera, no escribe (STALE). Un rechazo de Opera —el
   folio con saldo pendiente, la salida que no es hoy…— abre su causa, se cuenta al front office y el
   proceso espera (WAIT). Hecho, publica pms-reservations: la estancia vuelve «salida registrada».
 input:
@@ -28,6 +29,9 @@ input:
     description: la propiedad de Opera
   pmsReservationId:
     type: string
+  storedFolioId:
+    type: string
+    description: el folio que Opera guardó al generarlo (su documento es la factura), si lo guarda
     description: la reserva en Opera, si el front office la tiene enlazada; si no, se busca por el localizador
   stayId:
     type: string
@@ -39,3 +43,6 @@ output:
     description: DONE, STALE (ya fuera) o WAIT
   pmsReservationId:
     type: string
+  storedFolioId:
+    type: string
+    description: el folio que Opera guardó al generarlo (su documento es la factura), si lo guarda
