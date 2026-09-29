@@ -2,7 +2,7 @@ id: registrar-checkin
 name: Registrar check-in
 version: 1
 description: >-
-  Integración front office → PMS (pms-fo): la recepción ha hecho el check-in y el PMS, maestro de la estancia, lo registra — asigna en Opera la habitación que dio recepción si no la tiene y hace el check-in. Si Opera lo rechaza (habitación sucia u ocupada, llegada que no es hoy para Opera…) queda una causa y el proceso espera; lo transitorio se reintenta. Al entrar, la proyección de la estancia devuelve «en casa» al front office.
+  Integración front office → PMS (pms-fo): la recepción hizo el check-in y Opera, maestro de la estancia, lo registra (habitación y check-in). Un rechazo de Opera es una causa y el proceso espera; lo transitorio se reintenta.
 steps:
   - id: start
     type: START
