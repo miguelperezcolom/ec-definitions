@@ -17,6 +17,9 @@ input:
   stayId:
     type: string
     required: true
+  storedFolioId:
+    type: string
+    description: el folio guardado que generó el check-out; sin él, se genera ahora
 output:
   invoiceOutcome:
     type: string
