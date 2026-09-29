@@ -1,0 +1,41 @@
+id: record-no-show
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  Anota en la reserva de Opera que nadie llegó: un comentario «No show» con quién y cuándo lo dijo
+  (el estado «No Show» de Opera solo lo pone su auditoría nocturna; por API no hay otro). Una vez: si
+  ya lo tiene, o Opera ya la canceló, no escribe (STALE). Si Opera tiene a los huéspedes en casa, no
+  es un no-show: abre su causa y el proceso espera (WAIT).
+input:
+  hotelCode:
+    type: string
+    required: true
+    description: el hotel del front office (código del CRS); el de Opera si la reserva nació en Opera
+  locator:
+    type: string
+    required: true
+    description: el localizador del CRS; la reserva de Opera si nació en Opera
+  processKey:
+    type: string
+    required: true
+  definitionId:
+    type: string
+    required: true
+  pmsHotelCode:
+    type: string
+    required: true
+    description: la propiedad de Opera
+  pmsReservationId:
+    type: string
+    description: la reserva en Opera, si el front office la tiene enlazada; si no, se busca por el localizador
+  stayId:
+    type: string
+    required: true
+    description: la estancia del front office
+output:
+  noShowOutcome:
+    type: string
+    description: DONE, STALE o WAIT
+  pmsReservationId:
+    type: string

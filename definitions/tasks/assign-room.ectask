@@ -1,0 +1,49 @@
+id: assign-room
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  Asigna en Opera la habitación que recepción dio a la reserva, si Opera no la tiene ya: sin
+  habitación elegida, se queda la que Opera tenga o la primera que Opera sugiere. Idempotente: la
+  misma habitación dos veces no escribe. Un rechazo de Opera (habitación sucia, ocupada, de otro
+  tipo…) abre su causa y el proceso espera (WAIT); si Opera aún no tiene la reserva, espera a que se
+  proyecte.
+input:
+  hotelCode:
+    type: string
+    required: true
+    description: el hotel del front office (código del CRS); el de Opera si la reserva nació en Opera
+  locator:
+    type: string
+    required: true
+    description: el localizador del CRS; la reserva de Opera si nació en Opera
+  processKey:
+    type: string
+    required: true
+  definitionId:
+    type: string
+    required: true
+  pmsHotelCode:
+    type: string
+    required: true
+    description: la propiedad de Opera
+  pmsReservationId:
+    type: string
+    description: la reserva en Opera, si el front office la tiene enlazada; si no, se busca por el localizador
+  stayId:
+    type: string
+    required: true
+    description: la estancia del front office
+  roomNumber:
+    type: string
+    description: la habitación que dio recepción
+output:
+  roomOutcome:
+    type: string
+    description: DONE (asignada), STALE (ya la tenía) o WAIT
+  pmsReservationId:
+    type: string
+    description: la reserva en Opera
+  roomNumber:
+    type: string
+    description: la habitación que Opera tiene asignada

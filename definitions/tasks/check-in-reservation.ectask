@@ -1,0 +1,45 @@
+id: check-in-reservation
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  Hace el check-in de la reserva en Opera (OHIP front desk, POST checkIns). Idempotente: si Opera ya
+  la tiene en casa, no escribe (STALE). Un rechazo de Opera —habitación sin inspeccionar u ocupada, la
+  llegada no es la fecha de negocio de Opera…— abre su causa, se cuenta al front office («Opera:
+  rechazado — motivo») y el proceso espera (WAIT). Al entrar, publica pms-reservations: la
+  integración pms-fo devuelve la estancia «en casa» al front office.
+input:
+  hotelCode:
+    type: string
+    required: true
+    description: el hotel del front office (código del CRS); el de Opera si la reserva nació en Opera
+  locator:
+    type: string
+    required: true
+    description: el localizador del CRS; la reserva de Opera si nació en Opera
+  processKey:
+    type: string
+    required: true
+  definitionId:
+    type: string
+    required: true
+  pmsHotelCode:
+    type: string
+    required: true
+    description: la propiedad de Opera
+  pmsReservationId:
+    type: string
+    description: la reserva en Opera, si el front office la tiene enlazada; si no, se busca por el localizador
+  stayId:
+    type: string
+    required: true
+    description: la estancia del front office
+  roomNumber:
+    type: string
+    description: la habitación asignada
+output:
+  checkInOutcome:
+    type: string
+    description: DONE, STALE (ya en casa) o WAIT
+  pmsReservationId:
+    type: string

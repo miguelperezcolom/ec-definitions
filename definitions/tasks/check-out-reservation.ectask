@@ -1,0 +1,41 @@
+id: check-out-reservation
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  Hace el check-out de la reserva en Opera (OHIP cashiering, POST checkOuts) con el cajero de la
+  integración. Idempotente: si Opera ya la tiene fuera, no escribe (STALE). Un rechazo de Opera —el
+  folio con saldo pendiente, la salida que no es hoy…— abre su causa, se cuenta al front office y el
+  proceso espera (WAIT). Hecho, publica pms-reservations: la estancia vuelve «salida registrada».
+input:
+  hotelCode:
+    type: string
+    required: true
+    description: el hotel del front office (código del CRS); el de Opera si la reserva nació en Opera
+  locator:
+    type: string
+    required: true
+    description: el localizador del CRS; la reserva de Opera si nació en Opera
+  processKey:
+    type: string
+    required: true
+  definitionId:
+    type: string
+    required: true
+  pmsHotelCode:
+    type: string
+    required: true
+    description: la propiedad de Opera
+  pmsReservationId:
+    type: string
+    description: la reserva en Opera, si el front office la tiene enlazada; si no, se busca por el localizador
+  stayId:
+    type: string
+    required: true
+    description: la estancia del front office
+output:
+  checkOutOutcome:
+    type: string
+    description: DONE, STALE (ya fuera) o WAIT
+  pmsReservationId:
+    type: string

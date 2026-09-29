@@ -1,0 +1,23 @@
+id: report-no-show
+version: 1
+group: crs-integration
+topic: crs-integration
+description: >-
+  La integración crs-pms sube al CRS el no-show que el PMS registró: arranca «registrar-no-show»,
+  donde el CRS —maestro de la venta— cancela la reserva como no-show con su cargo. Una vez por
+  reserva; una que el CRS no tiene (nacida en Opera) o ya cancelada se anota y no sube.
+input:
+  hotelCode:
+    type: string
+    required: true
+    description: el hotel del CRS
+  locator:
+    type: string
+    required: true
+    description: el localizador del CRS
+  stayId:
+    type: string
+output:
+  reportOutcome:
+    type: string
+    description: REPORTED, ALREADY_REPORTED, NOT_IN_THE_CRS o ALREADY_CANCELLED
