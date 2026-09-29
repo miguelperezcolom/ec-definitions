@@ -2,7 +2,7 @@ id: registrar-checkout
 name: Registrar check-out
 version: 1
 description: >-
-  Integración front office → PMS (pms-fo): la recepción ha hecho el check-out y el PMS, maestro de la estancia y del folio, lo registra — hace el check-out en Opera con el cajero de la integración y recupera la factura que Opera emite, que llega al front office con la estancia cerrada. Si Opera lo rechaza (saldo pendiente…) queda una causa y el proceso espera; lo transitorio se reintenta.
+  Integración front office → PMS (pms-fo): la recepción hizo el check-out; Opera lo registra con el cajero de la integración y su factura llega al front office. Un rechazo es una causa y el proceso espera.
 steps:
   - id: start
     type: START

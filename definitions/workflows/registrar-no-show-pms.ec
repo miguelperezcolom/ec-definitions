@@ -2,7 +2,7 @@ id: registrar-no-show-pms
 name: Registrar no-show en el PMS
 version: 1
 description: >-
-  Integración front office → PMS → CRS (pms-fo, HLA F006): nadie de la reserva ha llegado. El PMS, maestro de la estancia, lo anota en la reserva de Opera (su estado «No Show» solo lo pone la auditoría nocturna) y la integración crs-pms lo sube al CRS, maestro de la venta, que aplica su cargo («registrar-no-show»). La cancelación con el cargo baja por la proyección de siempre.
+  Integración front office → PMS → CRS (HLA F006): nadie llegó. Opera lo anota en la reserva y la integración crs-pms lo sube al CRS, que aplica su cargo (registrar-no-show); la cancelación baja como siempre.
 steps:
   - id: start
     type: START
