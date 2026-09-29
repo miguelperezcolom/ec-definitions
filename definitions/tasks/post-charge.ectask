@@ -1,0 +1,66 @@
+id: post-charge
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  Postea un cargo de recepción (late check-out, extra, consumo) en el folio de la reserva en Opera
+  (OHIP cashiering, POST charges, ventana 1) con el cajero de la integración y el código de
+  transacción de su tipo; la referencia del posteo es FO:<lineId>. Idempotente: si Opera ya tiene
+  un posteo con esa referencia, no escribe (STALE) y da su número. Si Opera no tiene a los huéspedes
+  en casa todavía, o rechaza el cargo, abre su causa, se cuenta al front office y el proceso espera
+  (WAIT); el check-in en Opera resuelve la espera de «en casa».
+input:
+  hotelCode:
+    type: string
+    required: true
+    description: el hotel del front office (código del CRS); el de Opera si la reserva nació en Opera
+  locator:
+    type: string
+    required: true
+    description: el localizador del CRS; la reserva de Opera si nació en Opera
+  processKey:
+    type: string
+    required: true
+  definitionId:
+    type: string
+    required: true
+  pmsHotelCode:
+    type: string
+    required: true
+    description: la propiedad de Opera
+  pmsReservationId:
+    type: string
+    description: la reserva en Opera, si el front office la tiene enlazada; si no, se busca por el localizador
+  stayId:
+    type: string
+    required: true
+    description: la estancia del front office
+  lineId:
+    type: string
+    required: true
+    description: la línea del folio del front office — la clave de idempotencia (la referencia del posteo en Opera)
+  chargeKind:
+    type: string
+    description: ADD_ON, LATE_CHECK_OUT o CONSUMPTION — con chargeCode, el código de transacción de Opera
+  chargeCode:
+    type: string
+    description: el código del front office (su catálogo de cargos, su add-on); ninguno para el late check-out
+  description:
+    type: string
+    description: el concepto de la línea, como lo muestra el folio
+  amount:
+    type: string
+    required: true
+    description: el importe, decimal («50.00»), en la moneda de la propiedad
+  currency:
+    type: string
+    description: ISO 4217; ninguna, la de la propiedad
+output:
+  chargeOutcome:
+    type: string
+    description: DONE, STALE (ya estaba en el folio, o Opera la tiene cancelada) o WAIT
+  pmsReservationId:
+    type: string
+  pmsPostingId:
+    type: string
+    description: el número de transacción del posteo en Opera
