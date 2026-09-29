@@ -1,0 +1,23 @@
+id: fetch-invoice
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  Recupera la factura que Opera emitió al hacer el check-out —el PMS es el maestro del folio—: el
+  folio de la salida (número, fecha, importe) y, si Opera da su documento, el PDF; y se la manda al
+  front office con la estancia cerrada. Si Opera no la da, el front office ofrece su proforma. No
+  espera: lo que Opera no tenga no bloquea la salida.
+input:
+  pmsHotelCode:
+    type: string
+    required: true
+  pmsReservationId:
+    type: string
+    required: true
+  stayId:
+    type: string
+    required: true
+output:
+  invoiceOutcome:
+    type: string
+    description: DONE (con documento), FIGURES (sin documento) o SKIP (Opera no emitió folio)
