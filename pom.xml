@@ -45,9 +45,8 @@
                     <tasksDirectory>${ec.definitions.dir}/tasks</tasksDirectory>
                     <!-- Un directorio vacío es un directorio movido o renombrado, no un visto bueno. -->
                     <failOnMissing>true</failOnMissing>
-                    <!-- Ningún proceso tiene hoy una tarea humana, así que no hay formularios; ponlo a
-                         true al añadir uno en definitions/forms. -->
-                    <validateForms>false</validateForms>
+                    <!-- Los formularios de los USER_TASK (reset-demo: confirmar-reset-demo). -->
+                    <validateForms>true</validateForms>
                     <!-- Todavía no hay reglas en este repositorio; ponlo a true al añadir definitions/rules. -->
                     <validateRules>false</validateRules>
                     <!-- Los contratos de las tareas (.ectask) que los pasos ACTION referencian con

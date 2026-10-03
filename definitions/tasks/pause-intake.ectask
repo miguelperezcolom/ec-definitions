@@ -1,0 +1,18 @@
+id: pause-intake
+version: 1
+group: demo
+topic: booking
+description: >-
+  El CRS deja de admitir reservas nuevas, cambios y cancelaciones —el asistente, la API, las demo—
+  mientras la demo vuelve a cero: nada nuevo entra a medio vaciar. Se levanta sola pasado un tiempo
+  (30 min por defecto) si nadie la levanta antes. Idempotente.
+input:
+  processKey:
+    type: string
+    required: true
+  launchedBy:
+    type: string
+output:
+  intakePausedUntil:
+    type: string
+    description: hasta cuándo, como mucho, ISO-8601

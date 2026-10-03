@@ -1,0 +1,18 @@
+id: clean-salesforce
+version: 1
+group: demo
+topic: customer-mdm
+description: >-
+  El MDM deja Salesforce como en zero.sh: borra todos los contactos y los Cases de petición de cambio
+  (MdmRequestId__c), de doscientos en doscientos, y reanuda los eventos de Salesforce desde ahora —
+  lo que acaba de borrar no es suyo que repetir. Idempotente: lo que ya no está no se borra dos veces.
+input:
+  processKey:
+    type: string
+output:
+  salesforceDeleted:
+    type: string
+    description: cuántos Cases y contactos borró
+errors:
+  - code: SALESFORCE_LIMIT
+    description: la cuota diaria de la API de Salesforce está agotada; reintentar mañana

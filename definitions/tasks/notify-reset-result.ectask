@@ -1,0 +1,25 @@
+id: notify-reset-result
+version: 1
+group: demo
+topic: integrations
+description: >-
+  Deja en la bandeja de los administradores el resultado del reset —quién lo lanzó, quién lo
+  confirmó, el contexto de Opera nuevo, la salud— y lo audita. Idempotente: un aviso por proceso.
+input:
+  processKey:
+    type: string
+    required: true
+  launchedBy:
+    type: string
+  operaContext:
+    type: string
+  salesforceDeleted:
+    type: string
+  enginePurged:
+    type: string
+  seededBookings:
+    type: string
+  healthOk:
+    type: string
+  healthSummary:
+    type: string

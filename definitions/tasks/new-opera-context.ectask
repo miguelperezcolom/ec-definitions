@@ -1,0 +1,20 @@
+id: new-opera-context
+version: 1
+group: demo
+topic: pms-integration
+description: >-
+  Un contexto de Opera nuevo para esta pasada de la demo (ECDEMO1-<MMddHHmm>, UTC): el conector lo
+  toma al momento, sin reiniciar, y lo guarda en el ConfigMap ec-demo-run para el próximo arranque y
+  los scripts. Opera no se limpia nunca: un localizador nuevo que repita uno viejo no encuentra —ni
+  actualiza— la reserva de una pasada anterior. Idempotente: el mismo proceso, el mismo contexto.
+input:
+  processKey:
+    type: string
+    required: true
+output:
+  operaContext:
+    type: string
+    description: el contexto del localizador del CRS en Opera (OPERA_EXTERNAL_SYSTEM)
+  operaCustomReference:
+    type: string
+    description: la Custom Reference de las reservas de esta pasada (OPERA_CUSTOM_REFERENCE)

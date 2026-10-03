@@ -1,0 +1,10 @@
+id: resume-intake
+version: 1
+group: demo
+topic: booking
+description: >-
+  El CRS vuelve a admitir reservas. Idempotente: levantar una pausa que no hay no hace nada.
+input:
+  processKey:
+    type: string
+    required: true

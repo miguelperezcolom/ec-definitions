@@ -1,0 +1,22 @@
+id: confirmar-reset-demo
+name: Confirmar el reset de la demo
+description: >-
+  Esto lleva la demo a cero, como deploy/demo/zero.sh: se borran las reservas, las integraciones
+  (crs-pms y pms-fo), los mapeos, los clientes del MDM, los huéspedes y estancias del front office,
+  las notificaciones, los avisos de recepción, la auditoría y los procesos del motor — y en
+  Salesforce, TODOS los contactos y los Cases de petición de cambio. Se quedan los interlocutores
+  del ERP, las habitaciones y catálogos del front office, las reglas de registro, las definiciones,
+  el contenido y los usuarios. Opera no se toca: la demo usa un contexto nuevo. No se puede deshacer.
+requiredRoles:
+  - ai-admin
+fields:
+  - id: confirmado
+    label: Sí, resetear la demo — también borra los contactos y Cases de Salesforce
+    description: Sin marcar, el proceso termina sin cambiar nada.
+    dataType: bool
+    stereotype: checkbox
+  - id: sembrar
+    label: Después, sembrar las 10 reservas demo de MRU01 (el punto de partida del flujo 1)
+    description: Sin integración se quedan en el CRS, como con «+ 10 reservas demo».
+    dataType: bool
+    stereotype: checkbox
