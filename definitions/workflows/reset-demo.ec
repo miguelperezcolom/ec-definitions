@@ -2,12 +2,14 @@ id: reset-demo
 name: Resetear la demo
 version: 1
 description: >-
-  La demo vuelve a cero, como deploy/demo/zero.sh pero sin parar nada: una persona lo confirma; el
-  CRS deja de admitir reservas; cada servicio se vacía a sí mismo (en paralelo); Salesforce pierde
-  sus contactos y Cases; Opera recibe un contexto nuevo (nunca se limpia); el motor borra los
-  procesos menos éste; el CRS vuelve a admitir reservas; opcionalmente se siembran las reservas
-  demo; se comprueba la salud y queda un aviso en la bandeja. Lo lanza la página Demo del plano de
-  control. Un paso que falla tres veces deja el proceso en error: «Reintentar desde el fallo».
+  La demo a cero sin parar nada (como zero.sh): un administrador lo confirma; cada servicio se vacía a sí mismo; Salesforce se limpia; Opera, contexto nuevo; el motor, a cero menos éste. Lo lanza la página Demo.
+# Los pasos: una persona (ai-admin) confirma en un formulario que dice que también borra Salesforce;
+# el CRS deja de admitir reservas; cada servicio se vacía a sí mismo (tarea reset en su topic, en
+# paralelo); Salesforce pierde sus contactos y Cases; Opera recibe un contexto nuevo (nunca se limpia);
+# el motor borra los procesos menos éste; el CRS reanuda; opcionalmente se siembran las reservas demo;
+# la salud y un aviso en la bandeja. Un paso que falla tres veces deja el proceso en error: «Reintentar
+# desde el fallo» (la página Demo, «Reintentar el reset»). La descripción, < 255 caracteres: es una
+# columna varchar(255) del motor, y una más larga no se importa.
 steps:
   - id: start
     type: START
