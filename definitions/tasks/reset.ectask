@@ -1,0 +1,19 @@
+id: reset
+version: 1
+group: demo
+topic: integrations
+description: >-
+  Un servicio vuelve a cero: vacía sus propias tablas —sólo lo que hizo la integración; lo que está
+  configurado se queda— en una transacción, con sus consumidores de Kafka en pausa mientras tanto.
+  Lo hace él mismo, sin parar y sin SQL de fuera. Lo sirve cada servicio en su propio topic: cada
+  paso de reset-demo nombra el del suyo. Idempotente: vaciar lo vacío no hace nada.
+input:
+  processKey:
+    type: string
+    description: el reset-demo que lo pide
+  launchedBy:
+    type: string
+    description: quién lanzó el reset, para los logs
+errors:
+  - code: RESET_FAILED
+    description: no pudo vaciar sus tablas; nada cambió (la transacción se deshizo) y sus consumidores siguen

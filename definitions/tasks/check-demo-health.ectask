@@ -1,0 +1,20 @@
+id: check-demo-health
+version: 1
+group: demo
+topic: integrations
+description: >-
+  Comprueba que la demo está lista después del reset: cada servicio responde (readiness), el
+  conector tiene el contexto de Opera nuevo y ninguna caída de Opera simulada sigue activa. No
+  falla: lo cuenta, y el aviso final lo dice.
+input:
+  processKey:
+    type: string
+  operaContext:
+    type: string
+output:
+  healthOk:
+    type: string
+    description: «true» si todo está bien
+  healthSummary:
+    type: string
+    description: una línea por comprobación

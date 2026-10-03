@@ -1,0 +1,17 @@
+id: purge-engine
+version: 1
+group: demo
+topic: integrations
+description: >-
+  El motor vuelve a cero: borra los procesos, sus pasos, formularios, candados, recursos, logs e
+  índices — todos menos el del propio reset, que sigue. Las definiciones, los contratos y la
+  analítica se quedan. El último paso de datos: nada que el reset vacíe antes se queda sin su
+  proceso. Idempotente.
+input:
+  processKey:
+    type: string
+    required: true
+output:
+  enginePurged:
+    type: string
+    description: cuántos procesos borró
