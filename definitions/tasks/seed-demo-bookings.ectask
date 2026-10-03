@@ -3,13 +3,16 @@ version: 1
 group: demo
 topic: booking
 description: >-
-  Siembra las reservas demo de MRU01 —las mismas que «+ 10 reservas demo» del Call center— donde
+  Si se pidió (sembrar, la casilla del formulario de confirmación), siembra las reservas demo de MRU01 —las mismas que «+ 10 reservas demo» del Call center— donde
   empieza el flujo 1: sin integración se quedan en el CRS. Una vez por proceso: si ya están (las
   marca su comentario, «demo-reset:<processKey>»), no crea otras.
 input:
   processKey:
     type: string
     required: true
+  sembrar:
+    type: string
+    description: «true» para sembrar; cualquier otra cosa no siembra nada
 output:
   seededBookings:
     type: string

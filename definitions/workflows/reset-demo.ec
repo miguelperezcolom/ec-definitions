@@ -197,26 +197,17 @@ steps:
     preconditions:
       - stepId: purge-engine
 
-  - id: seed
-    type: CHOICE
-    name: ¿Sembrar las reservas demo?
-    preconditions:
-      - stepId: resume-intake
+  # Siempre corre: siembra sólo si se marcó la casilla (sembrar). Un CHOICE delante y un JOIN XOR
+  # detrás terminaban el proceso antes de tiempo: la rama no tomada cancelaba el JOIN.
   - id: seed-demo-bookings
     type: ACTION
     task: seed-demo-bookings
-    name: Sembrar las reservas demo de MRU01
+    name: Sembrar las reservas demo de MRU01 (si se pidió)
     topic: booking
     timeout: PT2M
     retries: 3
     preconditions:
-      - stepId: seed
-        expression: sembrar == 'true'
-  - id: seeded
-    type: JOIN
-    name: Sembrada o no
-    joinType: XOR
-    preconditionStepIds: [seed-demo-bookings, seed]
+      - stepId: resume-intake
 
   - id: check-health
     type: ACTION
@@ -226,7 +217,7 @@ steps:
     timeout: PT2M
     retries: 3
     preconditions:
-      - stepId: seeded
+      - stepId: seed-demo-bookings
   - id: notify-result
     type: ACTION
     task: notify-reset-result
