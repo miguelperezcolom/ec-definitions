@@ -1,0 +1,66 @@
+id: post-payment
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  Postea un cobro de la caja de recepción (un pago o un anticipo) en el folio de la reserva en Opera
+  (OHIP cashiering, POST payments, acción Billing, ventana 1) con el cajero de la integración y la
+  forma de pago que corresponde; la referencia del posteo es FO:PAY:<paymentId>. Idempotente: si
+  Opera ya tiene un posteo con esa referencia, no escribe (STALE). Si Opera no tiene a los huéspedes
+  en casa todavía, o rechaza el cobro, abre su causa, se cuenta al front office y el proceso espera
+  (WAIT); el check-in en Opera resuelve la espera de «en casa».
+input:
+  hotelCode:
+    type: string
+    required: true
+    description: el hotel del front office (código del CRS); el de Opera si la reserva nació en Opera
+  locator:
+    type: string
+    required: true
+    description: el localizador del CRS; la reserva de Opera si nació en Opera
+  processKey:
+    type: string
+    required: true
+  definitionId:
+    type: string
+    required: true
+  pmsHotelCode:
+    type: string
+    required: true
+    description: la propiedad de Opera
+  pmsReservationId:
+    type: string
+    description: la reserva en Opera, si el front office la tiene enlazada; si no, se busca por el localizador
+  stayId:
+    type: string
+    required: true
+    description: la estancia del front office
+  paymentId:
+    type: string
+    required: true
+    description: el cobro del front office — la clave de idempotencia (FO:PAY:<paymentId>, la referencia del posteo en Opera)
+  paymentKind:
+    type: string
+    description: PAYMENT o DEPOSIT (un anticipo)
+  paymentMethod:
+    type: string
+    description: CASH, CARD_PINPAD, PAY_LINK, TRANSFER o MANUAL — la forma de pago de Opera sale de ella
+  paymentReference:
+    type: string
+    description: la referencia del cobro en recepción (la autorización del datáfono…)
+  amount:
+    type: string
+    required: true
+    description: el importe cobrado, decimal («100.00»), positivo, en la moneda de la propiedad
+  currency:
+    type: string
+    description: ISO 4217; ninguna, la de la propiedad
+output:
+  paymentOutcome:
+    type: string
+    description: DONE, STALE (ya estaba en el folio, o Opera la tiene cancelada) o WAIT
+  pmsReservationId:
+    type: string
+  pmsPostingId:
+    type: string
+    description: el número de transacción del pago en Opera
