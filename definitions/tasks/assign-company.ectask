@@ -1,0 +1,48 @@
+id: assign-company
+version: 1
+group: pms-integration
+topic: pms-integration
+description: >-
+  Pone en la reserva de Opera la empresa a la que se factura la estancia: su perfil Company (el partner
+  del ERP proyectado a Opera) y el alojamiento y la pensión enrutados a ella en la ventana 2 del folio
+  (OHIP cashiering, routingInstructions). Sin empresa, quita el perfil y su enrutado. Idempotente: si la
+  reserva ya tiene esa empresa, no escribe (STALE). Una empresa que aún no es perfil de Opera espera a
+  su proyección (MISSING_PARTNER); un rechazo de Opera abre su causa y el proceso espera (WAIT).
+input:
+  hotelCode:
+    type: string
+    required: true
+    description: el hotel del front office (código del CRS); el de Opera si la reserva nació en Opera
+  locator:
+    type: string
+    required: true
+    description: el localizador del CRS; la reserva de Opera si nació en Opera
+  processKey:
+    type: string
+    required: true
+  definitionId:
+    type: string
+    required: true
+  pmsHotelCode:
+    type: string
+    required: true
+    description: la propiedad de Opera
+  pmsReservationId:
+    type: string
+    description: la reserva en Opera, si el front office la tiene enlazada; si no, se busca por el localizador
+  stayId:
+    type: string
+    required: true
+    description: la estancia del front office
+  companyCode:
+    type: string
+    description: la empresa — el código del partner en el ERP; sin él, la estancia se queda sin empresa
+  companyName:
+    type: string
+    description: su nombre, para las trazas
+output:
+  companyOutcome:
+    type: string
+    description: DONE, STALE (la reserva ya estaba así) o WAIT
+  pmsReservationId:
+    type: string
