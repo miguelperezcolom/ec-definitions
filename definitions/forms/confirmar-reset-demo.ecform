@@ -4,9 +4,10 @@ description: >-
   Esto lleva la demo a cero, como deploy/demo/zero.sh: se borran las reservas, las integraciones
   (crs-pms y pms-fo), los mapeos, los clientes del MDM, los huéspedes y estancias del front office,
   las notificaciones, los avisos de recepción, la auditoría y los procesos del motor — y en
-  Salesforce, TODOS los contactos y los Cases de petición de cambio. Se quedan los interlocutores
-  del ERP, las habitaciones y catálogos del front office, las reglas de registro, las definiciones,
-  el contenido y los usuarios. Opera no se toca: la demo usa un contexto nuevo. No se puede deshacer.
+  Salesforce, TODOS los contactos y los Cases de petición de cambio. En Opera se cancelan las
+  reservas que escribió la demo (ésta y las pasadas anteriores, nada más), y la demo usa un contexto
+  nuevo. Se quedan los interlocutores del ERP, las habitaciones y catálogos del front office, las
+  reglas de registro, las definiciones, el contenido y los usuarios. No se puede deshacer.
 requiredRoles:
   - ai-admin
 fields:
