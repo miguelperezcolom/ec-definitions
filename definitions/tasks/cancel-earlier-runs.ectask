@@ -1,0 +1,27 @@
+id: cancel-earlier-runs
+version: 1
+group: demo
+topic: pms-integration
+description: >-
+  El conector cancela en Opera las reservas que escribió la demo —esta pasada y todas las anteriores—
+  y nada más: las reconoce por el contexto del localizador del CRS en sus referencias externas
+  (ECDEMO1, ECDEMO1-…, ECLOCAL-…, EC1-…). En las propiedades de las integraciones y en las
+  configuradas (OPERA_CLEANUP_PROPERTIES), con la conexión de la cadena si ninguna integración las
+  nombra. Las que están en casa no se pueden cancelar: las cuenta, para un check-out a mano.
+  Idempotente: una reserva cancelada ya no es candidata.
+input:
+  processKey:
+    type: string
+output:
+  cancelled:
+    type: integer
+    description: cuántas reservas canceló
+  inHouse:
+    type: integer
+    description: cuántas siguen en casa (no se pueden cancelar)
+  refused:
+    type: integer
+    description: cuántas no quiso cancelar Opera (el resumen dice cuáles)
+  summary:
+    type: string
+    description: el resumen, con las reservas en casa o rechazadas
