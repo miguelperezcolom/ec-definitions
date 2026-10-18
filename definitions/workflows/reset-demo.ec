@@ -2,10 +2,12 @@ id: reset-demo
 name: Resetear la demo
 version: 1
 description: >-
-  La demo a cero sin parar nada (como zero.sh): un administrador lo confirma; cada servicio se vacía a sí mismo; Salesforce se limpia; Opera, contexto nuevo; el motor, a cero menos éste. Lo lanza la página Demo.
+  La demo a cero sin parar nada: un administrador lo confirma; Opera pierde las reservas de la demo; cada servicio se vacía; Salesforce se limpia; Opera, contexto nuevo; el motor, a cero menos éste. Lo lanza la página Demo.
 # Los pasos: una persona (ai-admin) confirma en un formulario que dice que también borra Salesforce;
-# el CRS deja de admitir reservas; cada servicio se vacía a sí mismo (tarea reset en su topic, en
-# paralelo); Salesforce pierde sus contactos y Cases; Opera recibe un contexto nuevo (nunca se limpia);
+# el CRS deja de admitir reservas; Opera pierde las reservas que escribió la demo, ésta y las pasadas
+# anteriores (antes de vaciar las integraciones, que dicen cómo llegar a cada propiedad); cada servicio
+# se vacía a sí mismo (tarea reset en su topic, en paralelo); Salesforce pierde sus contactos y Cases;
+# Opera recibe un contexto nuevo;
 # el motor borra los procesos menos éste; el CRS reanuda; opcionalmente se siembran las reservas demo;
 # la salud y un aviso en la bandeja. Un paso que falla tres veces deja el proceso en error: «Reintentar
 # desde el fallo» (la página Demo, «Reintentar el reset»). La descripción, < 255 caracteres: es una
@@ -45,12 +47,24 @@ steps:
       - stepId: confirmed
         expression: confirmado == 'true'
 
+  # Con la entrada en pausa nada nuevo llega a Opera; las integraciones todavía dicen cómo llegar a
+  # cada propiedad. Lo que Opera no deja cancelar (en casa, rechazadas) va en el resumen del paso.
+  - id: cancel-earlier-runs
+    type: ACTION
+    task: cancel-earlier-runs
+    name: Cancelar en Opera las reservas de la demo (esta pasada y las anteriores)
+    topic: pms-integration
+    timeout: PT15M
+    retries: 3
+    preconditions:
+      - stepId: pause-intake
+
   # Cada servicio se vacía a sí mismo: la misma tarea, reset, en el topic de cada uno.
   - id: reset-services
     type: FORK
     name: Cada servicio, a cero
     preconditions:
-      - stepId: pause-intake
+      - stepId: cancel-earlier-runs
 
   - id: reset-booking
     type: ACTION
@@ -170,7 +184,7 @@ steps:
   - id: new-opera-context
     type: ACTION
     task: new-opera-context
-    name: Un contexto nuevo de Opera (Opera no se limpia)
+    name: Un contexto nuevo de Opera
     topic: pms-integration
     timeout: PT2M
     retries: 3
