@@ -1,0 +1,20 @@
+id: revisar-solicitud-rrhh
+name: Revisar en RRHH una solicitud aprobada por su responsable
+description: >-
+  Su responsable ya la ha aprobado. Compruébala (saldo de vacaciones, presupuesto de formación,
+  material disponible) y apruébala o recházala; el empleado recibe la decisión con tu comentario.
+fields:
+  - id: decisionRrhh
+    label: Decisión de RRHH
+    dataType: string
+    stereotype: radio
+    required: true
+    options:
+      - value: APROBAR
+        label: Aprobar
+      - value: RECHAZAR
+        label: Rechazar
+  - id: comentarioRrhh
+    label: Comentario para el empleado
+    dataType: string
+    stereotype: textarea
