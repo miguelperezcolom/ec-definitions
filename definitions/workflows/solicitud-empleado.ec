@@ -2,11 +2,8 @@ id: solicitud-empleado
 name: Solicitud de un empleado
 version: 1
 description: >-
-  Un empleado pide algo desde la intranet (vacaciones, formación, material). Lo decide su
-  responsable — la tarea es suya, y si en dos días no la ha decidido pasa al responsable de su
-  responsable — y, aprobado, RRHH. Cada paso se publica en el destino «solicitudes», del que la
-  intranet (content-hub) saca el estado que ve el empleado. La lanza la intranet con la clave
-  «solicitud:<id>» y las variables requestId, employeeId, managerId, escalateToId y hrUserId.
+  Un empleado pide algo desde la intranet. Lo decide su responsable (a los dos días pasa al suyo) y
+  después RRHH. Cada paso se publica en «solicitudes». Clave «solicitud:<id>».
 steps:
   - id: start
     type: START
