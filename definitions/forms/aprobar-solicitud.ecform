@@ -1,0 +1,21 @@
+id: aprobar-solicitud
+name: Aprobar la solicitud de un empleado
+description: >-
+  Una solicitud de alguien de tu equipo (vacaciones, formación o material). Si la apruebas pasa a
+  RRHH; si la rechazas, se le comunica con tu comentario. La tarea es tuya: si no la decides en dos
+  días, pasa a tu responsable.
+fields:
+  - id: decision
+    label: Decisión
+    dataType: string
+    stereotype: radio
+    required: true
+    options:
+      - value: APROBAR
+        label: Aprobar
+      - value: RECHAZAR
+        label: Rechazar
+  - id: comentario
+    label: Comentario para el empleado
+    dataType: string
+    stereotype: textarea
