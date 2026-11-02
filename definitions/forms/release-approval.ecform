@@ -1,0 +1,10 @@
+{
+  "id": "release-approval",
+  "name": "Aprobación de una release",
+  "fields": [
+    { "id": "approved", "label": "¿Se aprueba?", "dataType": "string", "stereotype": "radio", "required": true,
+      "options": [ { "value": "true", "label": "Aprobar" }, { "value": "false", "label": "Rechazar" } ] },
+    { "id": "approver", "label": "Aprobador", "dataType": "string", "required": true },
+    { "id": "comment", "label": "Comentario", "dataType": "string" }
+  ]
+}
