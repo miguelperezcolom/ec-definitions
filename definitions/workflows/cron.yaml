@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/miguelperezcolom/eventconductor/main/modules/workflow-engine/src/main/resources/cron-schema.json
+#
+# Arranques programados. El motor nunca lee este fichero como una definición.
+
+# Newsletter PMO: refresca cada mañana los datos horneados en el sitio (proyectos de ServiceNow
+# SPM, píldoras) aunque no salga número. Sin aprobación ni email (kind = refresh). Un número
+# programado no va aquí: lo espera el TIMER de su propio proceso (publishAt).
+- id: newsletter-refresh
+  cron: "0 0 7 * * *"
+  zone: Europe/Madrid
+  workflow: publish-newsletter
+  variables:
+    kind: refresh
+    requestedBy: cron
