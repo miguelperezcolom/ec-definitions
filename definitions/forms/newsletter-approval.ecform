@@ -1,0 +1,10 @@
+{
+  "id": "newsletter-approval",
+  "name": "Aprobación de un número de la Newsletter PMO",
+  "fields": [
+    { "id": "approved", "label": "¿Se publica?", "dataType": "string", "stereotype": "radio", "required": true,
+      "options": [ { "value": "true", "label": "Publicar" }, { "value": "false", "label": "Rechazar" } ] },
+    { "id": "approver", "label": "Aprobador", "dataType": "string", "required": true },
+    { "id": "comment", "label": "Comentario", "dataType": "string" }
+  ]
+}
